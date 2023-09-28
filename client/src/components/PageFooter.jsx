@@ -2,7 +2,7 @@ import React from 'react';
 
 function PageFooter(props) {
     return (
-        <div>
+        <>
             <p className="links">
                 <span className="linkItem">友情链接：</span>
                 <a
@@ -40,7 +40,7 @@ function PageFooter(props) {
             </p>
             <p>© 2022 - Coder Station</p>
             <p>Powered by Create React App</p>
-        </div>
+        </>
     );
 }
 

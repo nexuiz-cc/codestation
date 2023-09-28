@@ -1,19 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-
-import "antd/dist/antd.min.css";
-import zhCN from "antd/es/locale/zh_CN"; // 中文语言包
+import zhCN from "antd/es/locale/zh_CN";
 import { ConfigProvider } from "antd";
 
+import "antd/dist/antd.min.css";
+import "./index.css";
+
 import { BrowserRouter } from "react-router-dom";
-
-import store from "./redux/store";
 import { Provider } from "react-redux";
-
-import "./index.css"
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <Provider store={store}>
     <BrowserRouter>

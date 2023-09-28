@@ -1,67 +1,68 @@
-import React from 'react';
-import { Button, List, Popover, Avatar, Image } from "antd";
-import { useSelector } from "react-redux";
-import { clearUserInfo,changeLoginStatus} from "../redux/userSlice";
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import styles from "../css/LoginAvatar.module.css";
-import { UserOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-// 该组件用于显示用户的头像，如果用户没有登录，那么就显示登录注册按钮
+import { Button, Avatar, Popover, List, Image } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { clearUserInfo, changeLoginStatus } from "../redux/userSlice"
+
+import styles from "../css/LoginAvatar.module.css"
+
+/**
+ * 未登录展示登录/注册按钮，登录后展示用户头像
+ * @param {*} props 
+ * @returns 
+ */
 function LoginAvatar(props) {
 
-
-    const { isLogin, userInfo } = useSelector(state => state.user);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    function listClickHandle(item){
-        if(item === "个人中心"){
-            // 跳转到个人中心
-        } else {
-            // 退出登录
-            // 清除 token
-            localStorage.removeItem("userToken");
-            // 清除状态仓库
-            dispatch(clearUserInfo);
-            dispatch(changeLoginStatus(false));
-            navigate("/");
-        }
-    }
-
+    const { isLogin, userInfo } = useSelector(state => state.user);
+    // console.log(isLogin,'isLogin');
+    const dispatch = useDispatch();
 
     let loginStatus = null;
     if (isLogin) {
-        // 登录了的
         const content = (
             <List
-                dataSource={["个人中心", "退出登录"]}
                 size="large"
-                renderItem={(item) => {
-                    return (
-                        <List.Item style={{ cursor: "pointer" }} onClick={()=>listClickHandle(item)}>{item}</List.Item>
-                    )
-                }}
+                dataSource={["个人中心", "退出登录"]}
+                renderItem={(item) => (
+                    <List.Item style={{ cursor: "pointer" }} onClick={() => listClickHandle(item)}>{item}</List.Item>
+                )}
             />
         );
         loginStatus = (
-            <Popover content={content} trigger="hover" placement="bottom">
+            <Popover placement="bottom" content={content} trigger="hover">
                 <div className={styles.avatarContainer}>
-                    <Avatar src={<Image src={userInfo?.avatar} preview={false}/>} size="large" icon={<UserOutlined />} />
+                    <Avatar src={<Image src={userInfo?.avatar} preview={false} />} size="large" icon={<UserOutlined />} />
                 </div>
             </Popover>
         );
     } else {
-        // 没有登录
         loginStatus = (
-            <Button type="primary" size="large" onClick={props.loginHandle}>注册/登录</Button>
+            <Button type="primary" size="large" onClick={props.loginHandle}>
+                注册/登录
+            </Button>
         );
+    }
+
+    function listClickHandle(item) {
+        if (item === "个人中心") {
+            navigate("/personal")
+        } else if (item === "退出登录") {
+            // 清除本地 token
+            localStorage.removeItem("userToken");
+            // 清除本地仓库存储的用户信息
+            dispatch(clearUserInfo());
+            dispatch(changeLoginStatus(false));
+            navigate("/")
+        }
     }
 
     return (
         <div>
             {loginStatus}
         </div>
+
     );
 }
 

@@ -1,148 +1,100 @@
-import { Modal, Radio, Form, Input, Button, Row, Col, Checkbox, message } from "antd";
-import { useState, useRef, useEffect } from "react";
-import { getCaptcha, userIsExist, addUser, userLogin, getUserById } from "../api/user";
-import { initUserInfo, changeLoginStatus } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { Modal, Radio, Form, Input, Button, Checkbox, message, Row, Col } from "antd";
+import { useState, useEffect, useRef } from "react"
+import { userIsExist, addUser, userLogin, getUserById, getCaptcha } from "../api/user"
+import { useDispatch } from "react-redux"
+import { changeLoginStatus, initUserInfo } from "../redux/userSlice"
 
-import styles from "../css/LoginForm.module.css";
-
+import styles from "../css/LoginForm.module.css"
 
 function LoginForm(props) {
-
     const [value, setValue] = useState(1);
-    const loginFormRef = useRef();
-    const registerFormRef = useRef();
     const dispatch = useDispatch();
-
-    // 登录表单的状态数据
     const [loginInfo, setLoginInfo] = useState({
         loginId: "",
         loginPwd: "",
         captcha: "",
         remember: false
-    });
-    // 注册表单的状态数据
+    })
     const [registerInfo, setRegisterInfo] = useState({
         loginId: "",
         nickname: "",
         captcha: "",
-    })
-
+    });
     const [captcha, setCaptcha] = useState(null);
 
+    const loginFormRef = useRef();
+    const registerFormRef = useRef();
 
     useEffect(() => {
+        // 一进来首先需要加载验证码
         captchaClickHandle();
-    }, [props.isShow])
+    }, [props.isShow]);
 
-
-    function handleOk() { }
-
-    function onChange(e) {
-        // 修改 value 的值，达到单选框能够切换
-        setValue(e.target.value);
-        captchaClickHandle();
-    }
-
-    async function loginHandle() {
-        const result = await userLogin(loginInfo);
-        console.log(result);
-        if(result.data){
-            // 验证码是正确的
-            // 接下来会有这么几种情况 （1）密码不正确 （2）账户被冻结 （3）账户正常，能够正常登录
-            const data = result.data;
-            if(!data.data){
-                // 账号密码不正确
-                message.error("账号或密码不正确");
-                captchaClickHandle();
-            } else if(!data.data.enabled){
-                // 账号被禁用了
-                message.warning("账号被禁用");
-                captchaClickHandle();
-            } else {
-                // 说明账号密码正确，能够登录
-                // 存储 token
-                localStorage.userToken = data.token;
-                // 将用户的信息存储到状态仓库，方便后面使用
-                const result = await getUserById(data.data._id);
-                dispatch(initUserInfo(result.data));
-                dispatch(changeLoginStatus(true));
-                handleCancel();
-            }
-        } else {
-            message.warning(result.msg);
-            captchaClickHandle();
+    useEffect(() => {
+        if (loginFormRef.current) {
+            loginFormRef.current.setFieldsValue(loginInfo);
         }
-     }
 
-    function handleCancel() {
-        // 清空上一次的内容
+        if (registerFormRef.current) {
+            registerFormRef.current.setFieldsValue(registerInfo);
+        }
+    }, [loginInfo, registerInfo])
+
+
+
+    const onChange = (e) => {
+        setValue(e.target.value);
+        // 切换登录和注册时，重新获取验证码
+        captchaClickHandle();
+    };
+
+    /**
+     * 打开登录模态框
+     */
+    const handleOk = () => {
+        props.closeModal();
+    };
+
+    /**
+     * 关闭登录模态框
+     */
+    const handleCancel = () => {
+        setLoginInfo({
+            loginId: "",
+            loginPwd: "",
+            captcha: "",
+            remember: true
+        })
         setRegisterInfo({
             loginId: "",
             nickname: "",
             captcha: "",
         })
-        setLoginInfo({
-            loginId: "",
-            loginPwd: "",
-            captcha: "",
-            remember: false
-        })
         props.closeModal();
-    }
+    };
 
-    async function registerHandle() {
-        const result = await addUser(registerInfo);
-        if (result.data) {
-            message.success("用户注册成功，默认密码为 123456");
-            // 还需要将用户的信息存储到数据仓库里面
-            dispatch(initUserInfo(result.data));
-            // 将数据仓库的登录状态进行修改
-            dispatch(changeLoginStatus(true));
-            // 关闭登录注册的弹出框
-            handleCancel();
-        } else {
-            message.warning(result.msg);
-            captchaClickHandle();
-        }
-    }
+    let container = "";
 
-
-    /**
-     * @param {*} oldInfo 之前整体的状态
-     * @param {*} newContent 用户输入的新的内容
-     * @param {*} key 对应的键名
-     * @param {*} setInfo 修改状态值的函数
-     */
-    function updateInfo(oldInfo, newContent, key, setInfo) {
+    // 用户填写内容时更新表单控件内容
+    function updateInfo(oldInfo, newInfo, key, setInfo) {
         const obj = { ...oldInfo };
-        obj[key] = newContent;
+        if (typeof newInfo === 'string') {
+            obj[key] = newInfo.trim();
+        } else {
+            obj[key] = newInfo;
+        }
         setInfo(obj);
     }
 
+    /**
+   * 获取新的验证码
+   */
     async function captchaClickHandle() {
         const result = await getCaptcha();
         setCaptcha(result);
     }
 
-    /**
-     * 验证登录账号是否存在
-     */
-    async function checkLoginIdIsExist() {
-        if (registerInfo.loginId) {
-            const { data } = await userIsExist(registerInfo.loginId);
-            if (data) {
-                // 该 loginId 已经注册过了
-                return Promise.reject("该用户已经注册过了");
-            }
-        }
-
-    }
-
-
-    let container = null;
     if (value === 1) {
-        // 登录面板的 JSX
         container = (
             <div className={styles.container}>
                 <Form
@@ -246,9 +198,8 @@ function LoginForm(props) {
                     </Form.Item>
                 </Form>
             </div>
-        )
+        );
     } else {
-        // 注册面板的 JSX
         container = (
             <div className={styles.container}>
                 <Form
@@ -338,22 +289,93 @@ function LoginForm(props) {
         );
     }
 
+    /**
+     * 验证用户是否存在
+     * @returns 
+     */
+    async function checkLoginIdIsExist() {
+        if (registerInfo.loginId) {
+            const { data } = await userIsExist(registerInfo.loginId);
+            if (data) {
+                return Promise.reject("该用户已经存在");
+            }
+        }
+
+    }
+
+    /**
+     * 注册对应处理逻辑
+     */
+    async function registerHandle() {
+        const result = await addUser({
+            loginId: registerInfo.loginId,
+            nickname: registerInfo.nickname,
+            captcha: registerInfo.captcha
+        });
+        if (result.data) {
+            message.success("用户注册成功，新用户默认密码123456");
+            setValue(1);
+            // 将用户信息存储到数据仓库
+            dispatch(changeLoginStatus(true));
+            dispatch(initUserInfo(result.data));
+            // 注册新用户后实现自动登录
+            handleCancel();
+        } else {
+            message.warning(result.msg);
+            captchaClickHandle();
+        }
+    }
+
+    /**
+     * 登录对应处理逻辑
+     */
+    async function loginHandle() {
+        const result = await userLogin(loginInfo);
+        if (result.data) {
+            const data = result.data;
+            if (!data.data) {
+                // 账号密码不正确
+                message.error("账号或密码不正确");
+                captchaClickHandle();
+            } else if (!data.data.enabled) {
+                // 账号已经被禁用
+                message.warning("该账号已经被冻结，请联系管理员");
+                captchaClickHandle();
+            } else {
+                // 说明账号密码正确，服务器端返回了 token
+                // 存储该 token
+                localStorage.userToken = data.token;
+                // 根据 id 获取用户信息存储到数据仓库
+                const result = await getUserById(data.data._id);
+                dispatch(initUserInfo(result.data));
+                dispatch(changeLoginStatus(true));
+                handleCancel();
+            }
+        } else {
+            message.warning(result.msg);
+            captchaClickHandle();
+        }
+    }
+
     return (
-        <div>
-            <Modal title="注册/登录" open={props.isShow} onOk={handleOk} onCancel={props.closeModal}>
-                <Radio.Group
-                    value={value}
-                    onChange={onChange}
-                    className={styles.radioGroup}
-                    buttonStyle="solid"
-                >
-                    <Radio.Button value={1} className={styles.radioButton}>登录</Radio.Button>
-                    <Radio.Button value={2} className={styles.radioButton}>注册</Radio.Button>
-                </Radio.Group>
-                {/* 下面需要显示对应功能的表单 */}
-                {container}
-            </Modal>
-        </div>
+        <Modal
+            title="注册/登录"
+            open={props.isShow}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={null}
+        >
+            <Radio.Group
+                onChange={onChange}
+                value={value}
+                buttonStyle="solid"
+                className={styles.radioGroup}
+            >
+                <Radio.Button value={1} className={styles.radioButton}>登录</Radio.Button>
+                <Radio.Button value={2} className={styles.radioButton}>注册</Radio.Button>
+            </Radio.Group>
+            {container}
+        </Modal>
     );
 }
 
