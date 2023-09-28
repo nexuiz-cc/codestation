@@ -18,8 +18,8 @@ function Interviews(props) {
     const { interviewTitleList } = useSelector(state => state.interview);
     const [treeData, setTreeData] = useState([]);
     const [interviewInfo, setInterviewInfo] = useState(null);
-
     useEffect(() => {
+        
         if (!interviewTitleList.length) {
             dispatch(getInterviewTitleList());
         }
