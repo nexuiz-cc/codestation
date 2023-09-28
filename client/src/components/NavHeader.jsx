@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import {Input, Select, Button} from "antd";
+import { Input, Select } from "antd";
+import LoginAvatar from "../components/LoginAvatar"
 
-function PageHeader() {
+function PageHeader(props) {
     return (
         <div className="headerContainer">
             {/* 头部 logo */}
@@ -24,7 +25,7 @@ function PageHeader() {
             {/* 搜索框 */}
             <div className="searchContainer">
                 <Input.Group compact>
-                    <Select defaultValue="issue" size="large" style={{width:"20%"}}>
+                    <Select defaultValue="issue" size="large" style={{ width: "20%" }}>
                         <Select.Option value="issue">问答</Select.Option>
                         <Select.Option value="book">书籍</Select.Option>
                     </Select>
@@ -34,14 +35,15 @@ function PageHeader() {
                         enterButton="搜索"
                         size="large"
                         style={{
-                            width:"80%"
+                            width: "80%"
                         }}
                     />
                 </Input.Group>
             </div>
             {/* 登录按钮 */}
             <div className="loginBtnContainer">
-                <Button type="primary" size="large">注册/登录</Button>
+                {/* 自定义头像组件 */}
+                <LoginAvatar loginHandle={props.loginHandle}/>
             </div>
         </div>
     );
