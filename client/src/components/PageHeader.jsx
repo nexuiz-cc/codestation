@@ -1,7 +1,7 @@
 import { Button ,Modal} from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import React,{ useState } from 'react';
-import styles from "../css/PageHeader.module.css"
+import styles from "../css/PageHeader.module.css";
 
 function PageHeader(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
