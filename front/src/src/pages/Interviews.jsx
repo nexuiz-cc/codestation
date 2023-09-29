@@ -1,4 +1,10 @@
-
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-plusplus */
+/* eslint-disable react/jsx-indent */
 import React, { useState, useEffect } from 'react';
 import { Tree, BackTop } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +14,7 @@ import { getInterviewById } from '../api/interview';
 import PageHeader from '../components/PageHeader';
 import styles from '../css/Interview.module.css';
 
+// eslint-disable-next-line no-unused-vars
 function Interviews(props) {
   const dispatch = useDispatch();
   const { typeList } = useSelector((state) => state.type);
@@ -26,13 +33,11 @@ function Interviews(props) {
       const arr = [];
       for (let i = 0; i < typeList.length; i++) {
         arr.push({
-          title: (<h3 style={{
-            fontWeight: '200',
-          }}
-          >
+          title: (
+          <h3 style={{ fontWeight: '200' }}>
             {typeList[i].typeName}
-
-          </h3>),
+          </h3>
+          ),
           key: i,
         });
       }
@@ -48,7 +53,7 @@ function Interviews(props) {
             >
               {interviewTitleList[i][j].interviewTitle}
 
-            </h4>),
+                    </h4>),
             key: `${i}-${j}`,
           });
         }
