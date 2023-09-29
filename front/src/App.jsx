@@ -1,18 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useLayoutEffect } from "react";
-import { Layout, message } from "antd";
-import RouterBefore from "./router/RouteBefore";
-
-import NavHeader from "./components/NavHeader";
-import PageFooter from "./components/PageFooter";
-import Login from "./components/LoginForm";
-
-import { useDispatch } from "react-redux";
-import { changeLoginStatus, initUserInfo } from "./redux/userSlice";
-import { getInfo, getUserById } from "./api/user";
-import { getTypeList } from "./redux/typeSlice";
-
-import "./css/App.css";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useLayoutEffect } from 'react';
+import { Layout, message } from 'antd';
+import { useDispatch } from 'react-redux';
+import RouterBefore from './src/router/RouteBefore';
+import NavHeader from './src/components/NavHeader';
+import PageFooter from './src/components/PageFooter';
+import Login from './src/components/LoginForm';
+import { changeLoginStatus, initUserInfo } from './src/redux/userSlice';
+import { getInfo, getUserById } from './src/api/user';
+import { getTypeList } from './src/redux/typeSlice';
+import './src/css/App.css';
 
 const { Header, Footer, Content } = Layout;
 
@@ -33,10 +31,10 @@ function App() {
         dispatch(changeLoginStatus(true));
       } else {
         message.warning(result.msg);
-        localStorage.removeItem("userToken");
+        localStorage.removeItem('userToken');
       }
     }
-    if (localStorage.getItem("userToken")) {
+    if (localStorage.getItem('userToken')) {
       whoami();
     }
 
@@ -63,7 +61,7 @@ function App() {
       <Layout>
         {/* 头部 */}
         <Header className="header">
-          <NavHeader loginHandle={loginHandle} />
+          <NavHeader loginHandle={loginHandle()} />
         </Header>
         {/* 内容区域 */}
         <Content className="content">
@@ -74,7 +72,7 @@ function App() {
         </Footer>
       </Layout>
       {/* 登录弹窗 */}
-      <Login isShow={isModalOpen} closeModal={closeModal} />
+      <Login isShow={isModalOpen} closeModal={closeModal()} />
     </div>
   );
 }
