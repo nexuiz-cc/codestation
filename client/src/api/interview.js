@@ -19,3 +19,13 @@ export function getInterviewById(interviewId) {
     method: "GET",
   });
 }
+
+/**
+ * 添加面试题
+ */
+export function addInterview(newInterview) {
+  return request("/api/interview", {
+    method: "POST",
+    data: newInterview,
+  });
+}
