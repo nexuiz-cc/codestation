@@ -223,8 +223,8 @@ exports.interviewRule = {
   },
   typeId: {
     presence: {
-      allowEmpty: false,
+      allowEmpty: true,
     },
-    type: "string",
+    type: "string"
   },
 };

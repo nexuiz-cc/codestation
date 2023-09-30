@@ -46,11 +46,11 @@ function NavHeader(props) {
                 <NavLink to="/books" className="navgation">
                     书籍
                 </NavLink>
-                {/* <NavLink to="/jobs" className="navgation">
-            招聘
-          </NavLink> */}
+                <NavLink to="/jobs" className="navgation">
+                  NotFound
+                </NavLink>
                 <NavLink to="/interviews" className="navgation">
-                    面试题
+                面接質問集
                 </NavLink>
                 <a
                     href="https://duyi.ke.qq.com/"

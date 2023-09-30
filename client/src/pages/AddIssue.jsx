@@ -13,7 +13,6 @@ import { typeOptionCreator } from "../utils/tool"
 import { getTypeList } from "../redux/typeSlice"
 
 function AddIssue() {
-
     const formRef = useRef();
     const editorRef = useRef();
 

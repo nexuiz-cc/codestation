@@ -1,34 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Tree, BackTop, Button ,Modal} from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { Tree, BackTop, Button ,Modal,Form,Input,Select} from 'antd';
 import { PlusOutlined  }from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { getInterviewTitleList } from '../redux/interviewSlice';
 import { getTypeList } from '../redux/typeSlice';
-import { getInterviewById } from '../api/interview';
+import { getInterviewById ,addInterview} from '../api/interview';
 import PageHeader from '../components/PageHeader';
 import styles from '../css/Interview.module.css';
+import { typeOptionCreator } from "../utils/tool"
 
 function Interviews(props) {
   const dispatch = useDispatch();
+  const formRef = useRef();
+  const { TextArea } = Input;
   const { typeList } = useSelector((state) => state.type);
   const { interviewTitleList } = useSelector((state) => state.interview);
   const [treeData, setTreeData] = useState([]);
   const [interviewInfo, setInterviewInfo] = useState(null);
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState('Content of the modal');
-
+  const { userInfo } = useSelector(state => state.user);
+  const [addinterviewInfo, setaddIssueInfo] = useState({
+    newTitle: "", // 问题标题
+    newContent: "", // 问题描述
+    typeId: "", // 问题分类
+});
   const showModal = () => {
     setOpen(true);
   };
-  
+  const handleChange = (value) => {
+    updateInfo(value, 'typeId')
+};
+  function addHandle() {
+    addInterview({
+        interviewTitle: addinterviewInfo.newTitle, // 问题标题
+        interviewContent: addinterviewInfo.newContent, // 问题描述
+        userId: userInfo._id, // 用户 id
+        typeId : addinterviewInfo.typeId,
+    });
+    handleOk();
+}
+function updateInfo(newInfo, key) {
+  const newInterviewInfo = { ...addinterviewInfo };
+  if (typeof newInfo === 'string') {
+    newInterviewInfo[key] = newInfo.trim();
+  } else {
+    newInterviewInfo[key] = newInfo;
+  }
+  setaddIssueInfo(newInterviewInfo);
+}
+
   const handleOk = () => {
-    setModalText('The modal will be closed after two seconds');
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
-    }, 1000);
+    }, 1500);
+    location.reload();
   };
 
   const handleCancel = () => {
@@ -111,7 +139,7 @@ function Interviews(props) {
 
   return (
       <div className={styles.container}>
-        <PageHeader title='面试题大全' />
+        <PageHeader title='面接質問集' />
         <div className={styles.interviewContainer}>
           <div className={styles.leftSide}>
           <Button className={styles.plusBtn} onClick={ showModal }><PlusOutlined /></Button>
@@ -121,18 +149,44 @@ function Interviews(props) {
         </div>
         <BackTop />
         <Modal
+        title="Title"
         open={open}
-        width='800'
-        onOk={handleOk}
+        onOk={addHandle}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
         <div className={styles.modalContent}>
-          title:<input name='title' className={styles.ipt}></input>
-          <br />
-          content:<textarea  className={styles.textArea}name='content'></textarea>
-        </div>
+            <Form name="basic" initialValues={addinterviewInfo} autoComplete="off" ref={formRef}   onFinish={addHandle}>
+               <Form.Item label="标题" name="interviewTitle"  rules={[{ required: true, message: '请输入标题' }]} >
+                  <Input placeholder="interviewTitle"   size="large"   value={addinterviewInfo.newTitle} 
+                         onChange={(e) => updateInfo(e.target.value, 'newTitle')}/>
+               </Form.Item>
+
+               <Form.Item label="内容" name="interviewContent"  rules={[{ required: true, message: '请输入内容' }]} >
+                  <TextArea showCount height='300' placeholder="interviewContent"   
+                  size="large"   value={addinterviewInfo.newContent} 
+                  onChange={(e) => updateInfo(e.target.value, 'newContent')}/>
+               </Form.Item>
+
+      
+
+               <Form.Item
+                    label="分类"
+                    name="typeId"
+                    rules={[{ required: true, message: '请选择问题所属分类' }]}
+                >
+                    <Select
+                        style={{ width: 200 }}
+                        onChange={handleChange}>
+                        {typeOptionCreator(Select, typeList)}
+                    </Select>
+                </Form.Item>
+
+             </Form>
+          </div>
       </Modal>
+         
+    
       </div>
   );
 }
