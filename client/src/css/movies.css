@@ -1,0 +1,44 @@
+.card {
+  height: 360px;
+}
+.card:hover {
+  background-color: #f0f0f0;
+  box-shadow: 10px 10px 20px -5px rgba(153, 153, 153, 0.66);
+}
+.container {
+  display: flex;
+  padding: 10px;
+  flex-flow: wrap;
+}
+.ant-layout-content {
+    flex: auto;
+    min-height: 0;
+    background: #F0F2F5 !important;
+}
+.h4 {
+  width: 150px;
+}
+.space {
+  padding: 10px;
+}
+.ant-layout-content {
+  width: 1300px !important;
+}
+
+.ant-layout.ant-layout-has-sider {
+  position: relative;
+  left: -300px;
+}
+
+.ant-layout-sider{
+    background-color: #e4e4e4!important;
+    width: 250px!important;
+    min-width: 250px!important;
+}
+.siderIpt{
+    position: relative;
+    top:50px;
+    left: 10px;
+    max-width: 90%;
+    height: 35px;
+}

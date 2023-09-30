@@ -46,8 +46,8 @@ function NavHeader(props) {
                 <NavLink to="/books" className="navgation">
                     书籍
                 </NavLink>
-                <NavLink to="/jobs" className="navgation">
-                  NotFound
+                <NavLink to="/movies" className="navgation">
+                  Movies
                 </NavLink>
                 <NavLink to="/interviews" className="navgation">
                 面接質問集

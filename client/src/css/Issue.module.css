@@ -20,7 +20,9 @@
 .rightSide{
     width: 28%;
     height: 100%;
-    /* outline: 1px solid #ccc; */
+    position: relative;
+    left: 50px;
+    top: -60px;
 }
 
 .noIssue{

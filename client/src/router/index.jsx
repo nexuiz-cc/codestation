@@ -14,6 +14,7 @@ import Personal from "../pages/Personal.jsx";
 import AddIssue from "../pages/AddIssue.jsx";
 import SearchPage from "../pages/SearchPage.jsx";
 import NotFound from "../pages/NotFound.jsx";
+import  Movies  from "../pages/Moives.jsx";
 
 function RouteConfig() {
   return (
@@ -27,6 +28,7 @@ function RouteConfig() {
       <Route path="/personal" element={<Personal />} />
       <Route path="/addIssue" element={<AddIssue />} />
       <Route path="/searchPage" element={<SearchPage />} />
+      <Route path="/movies" element={<Movies />} />
       <Route path="/" element={<Navigate replace to="/issues" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
