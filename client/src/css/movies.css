@@ -34,6 +34,8 @@
     background-color: #e4e4e4!important;
     width: 250px!important;
     min-width: 250px!important;
+    display: flex;
+    margin-top: -20px;
 }
 .siderIpt{
     position: relative;

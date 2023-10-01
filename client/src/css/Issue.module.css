@@ -1,7 +1,7 @@
 /* 问答页面样式 */
 
 .issueContainer{
-    width: 90%;
+    width: 100%;
     /* height: 3000px; */
     margin: 0 auto;
     /* outline: 1px solid red; */
@@ -18,10 +18,10 @@
 }
 
 .rightSide{
-    width: 28%;
+    width: 25%;
     height: 100%;
     position: relative;
-    left: 50px;
+    left: -10px;
     top: -60px;
 }
 

@@ -2,26 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Card, Input, Layout, Menu, theme } from 'antd';
 import axios from 'axios';
 import '../css/movies.css';
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import _ from 'lodash';
 
 function Movies() {
   const [movies, setMovies] = useState([]);
+  const [data, setData] = useState([]);
   const [resultList, setresultList] = useState([]);
   const { Sider } = Layout;
 
   const { Search } = Input;
-  const handleChange = (value, _e)=>{
+  const handleChange = (value, _e) => {
     // let obj = movies.find((v)=> v.title = value);
     // let arr = [];
     // arr.push(obj);
     // setresultList(arr);
- };
+  };
   const onSearch = (value, _e) => {
-    console.log(value);
-    let obj = movies.find((v)=> v.title = value);
-    let arr = [];
-    arr.push(obj);
-    setresultList(arr);
+    console.log(movies);
+    if (value == '') {
+      setresultList([]);
+    } else {
+      let arr = _.filter(movies,function(v){
+        return v.title == value;
+      })
+      console.log('arr',arr);
+      setresultList(arr);
+    }
   };
   let num = 1;
   const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=' + num + '&sort_by=popularity.desc';
@@ -32,11 +38,16 @@ function Movies() {
   };
   axios.get(url, { headers: header }).then(function (response) {
     setMovies(response.data.results);
+    setData(response.data.results);
   });
   movies.forEach((item) => {
     item.poster_path = 'https://image.tmdb.org/t/p/w185' + item.poster_path;
   });
 
+  useEffect(() => {
+    if (resultList.length == 0) {
+    }
+  }, []);
   return (
     <Layout style={{ minHeight: '150vh' }}>
       <Sider className='sider'>
