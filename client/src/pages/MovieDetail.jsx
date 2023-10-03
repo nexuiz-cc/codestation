@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Card } from 'antd';
 import { useParams } from 'react-router-dom';
-import movieDetailStyle from '../css/movieDetail.module.css';
+import '../css/movieDetail.css';
+import { Layout, Space, Card } from 'antd';
+
+const { Footer, Content } = Layout;
 import _ from 'lodash';
 function MovieDetail() {
   const { id } = useParams();
@@ -20,6 +22,7 @@ function MovieDetail() {
     axios.get(detailURL + id + '?language=en-US', { headers: header }).then(function (response) {
       response.data.poster_path = 'https://image.tmdb.org/t/p/w185' + response.data.poster_path;
       setData(response.data);
+      console.log('data', data);
     });
 
     axios.get(detailURL + id + '/release_dates', { headers: header }).then(function (response) {
@@ -32,6 +35,7 @@ function MovieDetail() {
       for (let item of response.data.cast) {
         if (item.profile_path !== null) {
           item.profile_path = 'https://image.tmdb.org/t/p/w185' + item.profile_path;
+          console.log();
         }
       }
       setActors(response.data.cast);
@@ -39,34 +43,48 @@ function MovieDetail() {
   }, []);
 
   return (
-    <div className={movieDetailStyle.box}>
-      <img
-        src={'https://image.tmdb.org/t/p/original/' + data.backdrop_path}
-        className={movieDetailStyle.backdrop}
-      />
-      <div className={movieDetailStyle.photo}>
-        <img src={data.poster_path} />
-        <h4 className={movieDetailStyle.h4}>
-          {' '}
-          {data.title} ( {year} ){' '}
-        </h4>
-        <p className={movieDetailStyle.text}>{date}</p>
-        <p className={movieDetailStyle.overview}>{data.overview}</p>
-       
-      </div>
-      <p className={movieDetailStyle.title}>Top Billed Cast :</p>
-      <div className={movieDetailStyle.box2}>
-        { actors.map((item) => item.profile_path !== null && (
-          <div className={movieDetailStyle.space}>
-            <Card className={movieDetailStyle.card} size='small'>
-              <img src={item.profile_path} />
-                <h4 className={movieDetailStyle.actorsName}>{item.name}</h4>
-                <p className={movieDetailStyle.character}>{item.character}</p>
-            </Card>
-          </div>
-        ),)}
-      </div>
-    </div>
+    <Layout>
+      <Content className='box'>
+        <img src={'https://image.tmdb.org/t/p/original/' + data.backdrop_path} className='backdrop' />
+        <div className='photo'>
+          <img src={data.poster_path} />
+          <h4 className='h4'>
+            {' '}
+            {data.title} ( {year} ){' '}
+          </h4>
+          <p className='text'>{date}</p>
+          <p className='overview'>{data.overview}</p>
+
+        </div>
+        <p className='title'>Top Billed Cast :</p>
+        <div className='box2'>
+          {actors.map((item) => item.profile_path !== null && (
+            <div className='space'>
+              <Card className='card' size='small'>
+                <img src={item.profile_path} width='150' />
+                <h4 className='actorsName'>{item.name}</h4>
+                <p className='character'>{item.character}</p>
+              </Card>
+            </div>
+          ),)}
+        </div>
+        <div className='rSider'>
+          {data.title !== null &&
+            <div className='tcbox'>
+              <p className='title2'>Original Title</p>
+              <p className='content2'>{data.title}</p>
+            </div>
+          }
+          {data.status !== null &&
+            <div className='tcbox'>
+              <p className='title2'>Status</p>
+              <p className='content2'>{data.status}</p>
+            </div>
+          }
+        </div>
+      </Content >
+      <Footer className='Footer'>Footer</Footer>
+    </Layout>
   );
 }
 
