@@ -69,9 +69,7 @@ function App() {
         <Content className="content">
           <RouterBefore />
         </Content>
-        <Footer className="footer">
-          <PageFooter />
-        </Footer>
+       
       </Layout>
       {/* 登录弹窗 */}
       <Login isShow={isModalOpen} closeModal={closeModal} />

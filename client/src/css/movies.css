@@ -1,5 +1,5 @@
 .card {
-  height: 360px;
+  height: 420px;
 }
 .card:hover {
   background-color: #f0f0f0;
@@ -9,14 +9,27 @@
   display: flex;
   padding: 10px;
   flex-flow: wrap;
+  min-width: 1100px;
+  justify-content: center;
+  position: relative;
 }
 .ant-layout-content {
-    flex: auto;
-    min-height: 0;
-    background: #F0F2F5 !important;
+  flex: auto;
+  min-height: 0;
 }
 .h4 {
   width: 150px;
+  font-family: 'Yu Gothic UI', Courier, monospace;
+  font-size: 16px;
+  position: relative;
+  top: 23px;
+}
+[id='346698'].h4{
+  top: 30px !important;
+}
+
+[id='976573'].h4{
+  top: 30px !important;
 }
 .space {
   padding: 10px;
@@ -30,17 +43,51 @@
   left: -300px;
 }
 
-.ant-layout-sider{
-    background-color: #e4e4e4!important;
-    width: 250px!important;
-    min-width: 250px!important;
-    display: flex;
-    margin-top: -20px;
+.ant-layout-sider {
+  background-color: #e4e4e4 !important;
+  width: 300px !important;
+  min-width: 280px !important;
+  display: flex;
+  margin-top: -20px;
 }
-.siderIpt{
-    position: relative;
-    top:50px;
-    left: 10px;
-    max-width: 90%;
-    height: 35px;
+.siderIpt {
+  position: relative;
+  top: 50px;
+  max-width: 195px;
+  height: 35px;
+}
+.releaseDate{
+  position: relative;
+  top: 15px;
+}
+.select {
+  display: flex;
+  position: relative;
+  top: 50px;
+}
+
+.avatar{
+  background-color: black!important;
+  border: 3.5px solid green;
+  font-size: 15px !important;
+  position: relative;
+  top: 135px;
+  right: 170px;
+}
+.avatar p{
+  position: relative;
+  top: -2px;
+}
+.ant-progress-inner{
+ position: relative;
+ width: 50px!important; 
+ height: 50px!important;
+ font-size: 14px!important;
+ top: 210px;
+ right: 65px;
+ color:white!important;
+}
+.ant-progress-text{
+  color:rgb(9, 80, 13)!important;
+  font-weight: 600;
 }

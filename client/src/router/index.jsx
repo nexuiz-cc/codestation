@@ -15,6 +15,7 @@ import AddIssue from "../pages/AddIssue.jsx";
 import SearchPage from "../pages/SearchPage.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import  Movies  from "../pages/Moives.jsx";
+import MovieDetail from "../pages/MovieDetail.jsx";
 
 function RouteConfig() {
   return (
@@ -23,6 +24,7 @@ function RouteConfig() {
       <Route path="/issues/:id" element={<IssuesDetail />} />
       <Route path="/books" element={<Books />} />
       <Route path="/books/:id" element={<BookDetail />} />
+      <Route path="/movie/:id" element={<MovieDetail />} />
       {/* <Route path="/jobs" element={<Jobs />} /> */}
       <Route path="/interviews" element={<Interview />} />
       <Route path="/personal" element={<Personal />} />
