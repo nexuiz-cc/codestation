@@ -92,6 +92,8 @@
 .title {
   font-family: 'AR One Sans', serif;
   font-size: 33px;
+  position: relative;
+  left: 25px;
 }
 
 .space {
