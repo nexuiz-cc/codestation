@@ -1,0 +1,99 @@
+.backdrop {
+  object-fit: cover;
+  object-position: 0 0;
+  position: relative;
+  top: -22px;
+  width: 1920px;
+  height: 500px;
+  opacity: 0.8;
+}
+
+.box {
+  width: 100%;
+  height: 477px;
+  color: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgb(147, 28, 216);
+}
+.box2 {
+  display: flex;
+  position: relative;
+  left: 5px;
+  top: -555px;
+  max-width: 1900px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.ant-layout {
+  background-color: white !important;
+}
+.title {
+  position: relative;
+  top: -530px;
+  left: 15px;
+  font-family: 'AR One Sans', serif;
+  font-size: 22px;
+  color: black;
+}
+.photo {
+  position: relative;
+  top: -390px;
+  left: 200px;
+}
+.photo .h4 {
+  color: white;
+  position: relative;
+  left: 250px;
+  top: -280px;
+  font-family: 'AR One Sans', serif;
+  font-weight: 600;
+  font-size: 44px;
+  width: 800px;
+}
+
+.text {
+  color: white;
+  position: relative;
+  left: 250px;
+  top: -300px;
+  font-family: 'AR One Sans', serif;
+  font-size: 25px;
+  width: 800px;
+}
+.overview {
+  color: white;
+  position: relative;
+  font-family: 'AR One Sans', serif;
+  left: 250px;
+  top: -320px;
+  font-size: 20px;
+  width: 1000px;
+}
+.card {
+  height: 350px;
+}
+
+.actorsName {
+  font-size: 18px;
+  font-family: 'AR One Sans', serif;
+  position: relative;
+  top: 5px;
+}
+.character {
+  font-size: 14px;
+  font-family: 'AR One Sans', serif;
+  position: relative;
+  top: -5px;
+}
+
+.title {
+  font-family: 'AR One Sans', serif;
+  font-size: 33px;
+}
+
+.space {
+  padding: 10px;
+}

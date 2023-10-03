@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Input, Layout, Select, Space, Avatar, Progress } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/movies.css';
+import style from '../css/movies.module.css';
 import _ from 'lodash';
 
 function Movies() {
@@ -76,29 +76,29 @@ function Movies() {
   console.log(movies);
   return (
     <Layout style={{ minHeight: '150vh' }}>
-      <Sider className='sider'>
-        <Space.Compact className='compact'>
-          <Select defaultValue='title' options={ options } className='select' />
-          <Search className='siderIpt' placeholder='input search text' allowClear enterButton='🔍' size='large' onSearch={onSearch} />
+      <Sider className={style.sider}>
+        <Space.Compact className={style.compact}>
+          <Select defaultValue='title' options={ options } className={style.select} />
+          <Search className={style.siderIpt} placeholder='input search text' allowClear enterButton='🔍' size='large' onSearch={onSearch} />
         </Space.Compact>
       </Sider>
-      <div className='container'>
+      <div className={style.container}>
         {resultList.length == 0 && movies.map((item) => (
-          <div className='space' key={item.id} >
+          <div className={style.space} key={item.id} >
             <Card 
-              className='card' 
+              className={style.card}
               onClick={()=>navigate(`/movie/${item.id}`)}>
                 <img src={item.poster_path} />
-                <h4 id={item.id} className='h4'>{ item.title }</h4>
-                <p className='releaseDate'>{ item.release_date }</p>
+                <h4 id={item.id} className={style.h4}>{ item.title }</h4>
+                <p className={style.releaseDate}>{ item.release_date }</p>
             </Card>
           </div>
         ))}
         {resultList.length != 0 && resultList.map((item) => (
-          <div className='space' key={item.id} onClick={()=>navigate(`/movie/${item.id}`)}>
-            <Card className='card'>
+          <div className={style.space} key={item.id} onClick={()=>navigate(`/movie/${item.id}`)}>
+            <Card className={style.card}>
               <img src={ item.poster_path } />
-              <h4 key={ item.id } className='h4'>
+              <h4 key={ item.id } className={style.h4}>
                 { item.title }
               </h4>
               <p>{ item.release_date }</p>

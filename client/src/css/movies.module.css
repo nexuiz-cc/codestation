@@ -91,3 +91,9 @@
   color:rgb(9, 80, 13)!important;
   font-weight: 600;
 }
+.space{
+  padding: 10px;
+}
+.sider{
+  background-color: #e4e4e4;
+}
