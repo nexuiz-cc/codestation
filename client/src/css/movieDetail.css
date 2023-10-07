@@ -133,9 +133,48 @@
 .Footer {
   background-color: aquamarine !important;
   font-size: 32px !important;
-  margin-top: 1420px;
+  margin-top: 2120px;
 }
 
 .tcbox {
   padding-bottom: 20px;
+}
+.tag {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  font-weight: 500;
+  font-family: 'AR One Sans', serif;
+  color: black !important;
+}
+.ant-tag {
+  margin: 10px 10px 0 0 !important;
+ position: relative;
+ top: -5px;
+}
+.editor{
+  display: flex;
+  flex-direction: column;
+  width: 1375px;
+  position: relative;
+  left: 100px;
+  top: -1350px;
+}
+
+.submit{
+  position: relative;
+  top: 15px;
+  background-color: #2F58CD!important;
+  position: relative;
+  left: 1230px;
+  color: white !important;
+  border-radius: 8px !important;
+  width: 150px;
+}
+
+.avatar{
+  position: relative;
+  top:40px;
+  left: -70px;
 }

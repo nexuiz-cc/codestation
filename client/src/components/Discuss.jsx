@@ -120,7 +120,10 @@ function Discuss(props) {
                 });
                 message.success("评论添加成功，积分+2");
                 setValue("");
+            }else if(props.commentType === 3){
+
             }
+
             setRefresh(!refresh);
         }
     }
