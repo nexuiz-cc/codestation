@@ -24,7 +24,7 @@ function LoginAvatar(props) {
         const content = (
             <List
                 size="large"
-                dataSource={["个人中心", "退出登录"]}
+                dataSource={["个人中心", "审核","退出登录"]}
                 renderItem={(item) => (
                     <List.Item style={{ cursor: "pointer" }} onClick={() => listClickHandle(item)}>{item}</List.Item>
                 )}
@@ -55,6 +55,8 @@ function LoginAvatar(props) {
             dispatch(clearUserInfo());
             dispatch(changeLoginStatus(false));
             navigate("/")
+        }else if(item === "审核"){
+            navigate("/review")
         }
     }
 

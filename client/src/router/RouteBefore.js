@@ -1,4 +1,4 @@
-import RouteConfig from "./index.jsx";
+import { RouteConfig } from "./index.jsx";
 import RouteBeforeConfig from "./RouteBeforeConfig";
 import { Alert } from "antd";
 

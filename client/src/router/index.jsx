@@ -16,8 +16,9 @@ import SearchPage from "../pages/SearchPage.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import  Movies  from "../pages/Moives.jsx";
 import MovieDetail from "../pages/MovieDetail.jsx";
+import Review from "../pages/Review.jsx";
 
-function RouteConfig() {
+export const RouteConfig = ()=>{
   return (
     <Routes>
       <Route path="/issues" element={<Issues />} />
@@ -33,8 +34,9 @@ function RouteConfig() {
       <Route path="/movies" element={<Movies />} />
       <Route path="/" element={<Navigate replace to="/issues" />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/review" element={<Review />} />
     </Routes>
   );
 }
 
-export default RouteConfig;
+
