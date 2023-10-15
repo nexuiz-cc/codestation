@@ -123,16 +123,16 @@ function Review(props) {
     fetchData();
   }, [issueTypeId, tableParams.pagination.current, tableParams.pagination.pageSize]);
 
-  const handleTableChange = (filters) => {
+  const handleTableChange = (pagination, filters, sorter) => {
     console.log('filters', filters);
     let arr = [];
 
     for (let i = 0; i < filters.type.length; i++) {
-      let str = tableData.find(function (item) {
-        return item.type == filters.type[i];
+      let str = tableData.find(function(item){
+        return item.type ==filters.type[i]
       });
       arr.push(str);
-      console.log('arr:', arr);
+      console.log('arr:',arr);
     }
     setTableData(arr);
   };
