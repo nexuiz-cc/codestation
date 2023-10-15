@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { Table, Space, Button } from 'antd';
 import { getIssueByPage, updateIssue } from '../api/issue';
 
+
 function Review(props) {
   const [issues, setIssues] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [resData,setResData]= useState([]);
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
     pagination: {
@@ -118,23 +120,25 @@ function Review(props) {
         },
       });
       setTableData(data.data);
+      setResData(data.data)
       setLoading(false);
     }
     fetchData();
   }, [issueTypeId, tableParams.pagination.current, tableParams.pagination.pageSize]);
 
   const handleTableChange = (pagination, filters, sorter) => {
-    console.log('filters', filters);
     let arr = [];
-
-    for (let i = 0; i < filters.type.length; i++) {
-      let str = tableData.find(function(item){
-        return item.type ==filters.type[i]
-      });
-      arr.push(str);
-      console.log('arr:',arr);
+    if (filters.type == null) {
+      setTableData(resData);
+    } else {
+      for (let i = 0; i < filters.type.length; i++) {
+        let temp = tableData.filter(function (item) {
+          return item.type == filters.type[i];
+        });
+        arr=arr.concat(temp);
+      }
+      setTableData(arr);
     }
-    setTableData(arr);
   };
 
   return (
