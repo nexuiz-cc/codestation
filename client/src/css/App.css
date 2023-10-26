@@ -67,7 +67,7 @@
 
 .content {
   width: 1903px;
-  height: 2000px;
+  max-height: 2000px;
   background-color: #fff;
   margin: 85px auto 0 auto;
 }

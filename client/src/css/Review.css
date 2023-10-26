@@ -1,0 +1,19 @@
+.title {
+  position: relative;
+  top: 5px;
+  font-size: 15px;
+}
+
+.text {
+  position: relative;
+  top: 8px;
+  left: -5px;
+  text-align: left;
+  color: black;
+  font-size: 15px;
+}
+.table{
+    width: 96%;
+    position: relative;
+    left: 2%;
+}

@@ -14,11 +14,14 @@ import Personal from "../pages/Personal.jsx";
 import AddIssue from "../pages/AddIssue.jsx";
 import SearchPage from "../pages/SearchPage.jsx";
 import NotFound from "../pages/NotFound.jsx";
-import  Movies  from "../pages/Moives.jsx";
+import Movies from "../pages/Moives.jsx";
 import MovieDetail from "../pages/MovieDetail.jsx";
 import Review from "../pages/Review.jsx";
-
-export const RouteConfig = ()=>{
+import LearnReact from "../pages/LearnReact.jsx";
+import Conten1 from "../components/Content1.jsx";
+import Conten2 from "../components/Content2.jsx";
+import Defalut from "../components/Defalut.jsx";
+export const RouteConfig = () => {
   return (
     <Routes>
       <Route path="/issues" element={<Issues />} />
@@ -35,6 +38,11 @@ export const RouteConfig = ()=>{
       <Route path="/" element={<Navigate replace to="/issues" />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/review" element={<Review />} />
+      <Route path="/learnReact" element={<LearnReact />} >
+        <Route index element={<Defalut />}/>
+        <Route path="content1" element={<Conten1 />}/>
+        <Route path="content2" element={<Conten2 />}/>
+      </Route>
     </Routes>
   );
 }

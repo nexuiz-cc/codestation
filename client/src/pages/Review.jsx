@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Table, Space, Button } from 'antd';
 import { getIssueByPage, updateIssue } from '../api/issue';
-
+import '../css/Review.css';
 
 function Review(props) {
   const [issues, setIssues] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const [resData,setResData]= useState([]);
+  const [resData, setResData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
     pagination: {
@@ -26,13 +26,46 @@ function Review(props) {
     }
   };
 
+  const setTitle = (param) => {
+    if (param.length > 5) {
+      param = param.substring(0, 6);
+      param = param + '...';
+      return (
+        <h4
+          type='text'
+          className='title'>
+          {param}
+        </h4>
+      );
+    } else {
+      return (
+        <h4
+          type='text'
+          className='title'>
+          {param}
+        </h4>
+      );
+    }
+  };
   const setText = (param) => {
     if (param.length > 10) {
-      param = param.substring(0, 11);
+      param = param.substring(0, 20);
       param = param + '...';
-      return <Button type='text'>{param}</Button>;
+      return (
+        <p
+          type='text'
+          className='text'>
+          {param}
+        </p>
+      );
     } else {
-      return <Button type='text'>{param}</Button>;
+      return (
+        <p
+          type='text'
+          className='text'>
+          {param}
+        </p>
+      );
     }
   };
   const pass = () => {
@@ -44,7 +77,7 @@ function Review(props) {
       dataIndex: 'issueTitle',
       key: 'issueTitle',
       width: '10%',
-      render: (text) => <Button type='text'>{text}</Button>,
+      render: (text) => setTitle(text),
     },
     {
       title: 'Content',
@@ -74,6 +107,16 @@ function Review(props) {
       title: 'Status',
       dataIndex: 'issueStatus',
       key: 'issueStatus',
+      filters: [
+        {
+          text: '已审核',
+          value: true,
+        },
+        {
+          text: '未审核',
+          value: false,
+        },
+      ],
       render: (text) => setStatus(text),
     },
     {
@@ -81,16 +124,8 @@ function Review(props) {
       key: 'action',
       render: (_, record) => (
         <Space size='middle'>
-          <Button
-            type='text'
-            id='pass'>
-            Pass
-          </Button>
-          <Button
-            type='text'
-            id='del'>
-            Delete
-          </Button>
+          <Button type='text' id='pass'>Pass</Button>
+          <Button type='text' id='confirm'>Pass with confirm</Button>
         </Space>
       ),
     },
@@ -110,8 +145,6 @@ function Review(props) {
       const { data } = await getIssueByPage(searchParams);
       for (let i = 0; i < data.data.length; i++) {
         data.data[i].type = '问答';
-        data.data[5].type = 'aa';
-        data.data[6].type = 'aa';
       }
       setTableParams({
         ...tableParams,
@@ -120,7 +153,7 @@ function Review(props) {
         },
       });
       setTableData(data.data);
-      setResData(data.data)
+      setResData(data.data);
       setLoading(false);
     }
     fetchData();
@@ -128,16 +161,35 @@ function Review(props) {
 
   const handleTableChange = (pagination, filters, sorter) => {
     let arr = [];
-    if (filters.type == null) {
+    console.log('filters:', filters);
+
+
+    if (filters.type == null || filters.issueStatus == null) {
       setTableData(resData);
-    } else {
+    }
+
+    if (filters.type != null) {
       for (let i = 0; i < filters.type.length; i++) {
         let temp = tableData.filter(function (item) {
           return item.type == filters.type[i];
         });
-        arr=arr.concat(temp);
+        arr = arr.concat(temp);
       }
       setTableData(arr);
+    }
+
+    if (filters.issueStatus != null) {
+      for (let i = 0; i < filters.issueStatus.length; i++) {
+        let temp = tableData.filter(function (item) {
+          return item.issueStatus == filters.issueStatus[i];
+        });
+        arr = arr.concat(temp);
+      }
+      setTableData(arr);
+    };
+    
+    if(filters.issueStatus != null && filters.type != null){
+
     }
   };
 
@@ -145,6 +197,7 @@ function Review(props) {
     <div>
       <h3>审核</h3>
       <Table
+        className='table'
         columns={columns}
         dataSource={tableData}
         pagination={tableParams.pagination}
