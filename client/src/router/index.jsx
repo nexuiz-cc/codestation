@@ -18,8 +18,8 @@ import Movies from "../pages/Moives.jsx";
 import MovieDetail from "../pages/MovieDetail.jsx";
 import Review from "../pages/Review.jsx";
 import LearnReact from "../pages/LearnReact.jsx";
-import Conten1 from "../components/Content1.jsx";
-import Conten2 from "../components/Content2.jsx";
+import Content1 from "../components/Content1.jsx";
+import Content2 from "../components/Content2.jsx";
 import Defalut from "../components/Defalut.jsx";
 export const RouteConfig = () => {
   return (
@@ -40,8 +40,8 @@ export const RouteConfig = () => {
       <Route path="/review" element={<Review />} />
       <Route path="/learnReact" element={<LearnReact />} >
         <Route index element={<Defalut />}/>
-        <Route path="content1" element={<Conten1 />}/>
-        <Route path="content2" element={<Conten2 />}/>
+        <Route path="content1" element={<Content1 />}/>
+        <Route path="content2" element={<Content2 />}/>
       </Route>
     </Routes>
   );

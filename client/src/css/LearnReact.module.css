@@ -9,12 +9,15 @@
     position:relative;
     height: 100vh;
     top: 20px;
+    
+
 }
 
 .sider{
     background-color: '#001529';
     position: relative;
     top: -22px;
+    width: 250px;
 }
 .def{
     display: flex;

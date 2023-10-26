@@ -3,7 +3,7 @@ import React from 'react';
 function Content2(props) {
     return (
         <div>
-            Content2
+           高阶组件
         </div>
     );
 }
