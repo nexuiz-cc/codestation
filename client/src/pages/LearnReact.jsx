@@ -14,16 +14,17 @@ function LearnReact() {
   }
   const items = [
     getItem('1. 属性默认值和类型验证', '1', <FormOutlined />),
-    getItem('2. 高阶组件', '2', <FormOutlined />)
+    getItem('2. 高阶组件', '2', <FormOutlined />),
+    getItem('3. Ref', '3', <FormOutlined />),
   ];
-
-
 
   const handleClick = (info) => {
     if (info.keyPath[0] == '1') {
       navigate('/learnReact/content1');
     } else if (info.keyPath[0] == '2') {
       navigate('/learnReact/content2');
+    }else if(info.keyPath[0] == '3'){
+      navigate('/learnReact/content3');
     }
   };
   return (
