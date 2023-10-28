@@ -9,13 +9,16 @@ function Content4Child2(props) {
           <MyContext2.Consumer>
             {(context2) => (
               <div className={styles.border3}>
-                Child2
-                <div>a:{context1.a}</div>
-                <div>b:{context1.b}</div>
-                <div>c:{context1.c}</div>
-                <div>a:{context2.a}</div>
-                <div>b:{context2.b}</div>
-                <div>c:{context2.c}</div>
+                <p className={styles.child}>Child2</p>
+                <div className={styles.cont}>
+                  <div>a:{context1.a}</div>
+                  <div>b:{context1.b}</div>
+                  <div>c:{context1.c}</div>
+                  <div>a:{context2.a}</div>
+                  <div>b:{context2.b}</div>
+                  <div>c:{context2.c}</div>
+                </div>
+
               </div>
             )}
           </MyContext2.Consumer>

@@ -7,7 +7,7 @@ import styles from '../css/LearnReact.module.css';
 function Content4Child1(props) {
   return (
     <div className={styles.border2}>
-      Content4Child1
+      <p className={styles.child}>Child1</p>
       <Content4Child2 />
       <Content4Child3 />
       <Content4Child4 />

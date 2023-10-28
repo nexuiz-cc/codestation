@@ -60,7 +60,7 @@
 .border {
   border: 2px solid darkblue;
   width: 300px;
-  height:600px;
+  height:690px;
   position: relative;
   left: 120px;
   top: 50px;
@@ -71,7 +71,7 @@
 .border2 {
   border: 2px solid rgb(15, 105, 3);
   width: 260px;
-  height: 560px;
+  height: 650px;
   position: relative;
   left: 15px;
   top: 10px;
@@ -85,5 +85,18 @@
   left: 20px;
   margin-top: 15px;
   font-family: 'Segoe UI';
+  font-size: 16px;
+}
+.child{
+  position: relative;
+  font-family: 'Segoe UI';
+  left: 10px;
+  font-size: 20px;
+}
+.cont{
+  position: relative;
+  font-family: 'Segoe UI';
+  left: 30px;
+  top:-20px;
   font-size: 16px;
 }
