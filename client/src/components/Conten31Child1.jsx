@@ -6,6 +6,6 @@ export default class Conten31Child1 extends Component {
   };
 
   render() {
-    return <div>子组件</div>;
+    return <div style={{lineHeight:'65px'}}>子组件</div>;
   }
 }

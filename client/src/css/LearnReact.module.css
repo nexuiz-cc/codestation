@@ -1,24 +1,22 @@
 .h4 {
   display: flex;
-  justify-content: center;
-  text-align: center;
+  font-family: '冬青黑体简体中文';
+  position: relative;
   font-size: 22px;
+  line-height: 45px;
 }
 
 .menu {
-  font-size: 16px;
-  position: relative;
-  height: 100vh;
-  top: 20px;
-
+  font-size: 18px;
+  font-family: '冬青黑体简体中文';
+  background-color: #001529;
 
 }
 
 .sider {
-  background-color: '#001529';
-  position: relative;
-  top: -22px;
-  width: 250px;
+  background-color: #001529;
+  margin-top: -22px;
+  height: 2000px;
 }
 
 .def {
@@ -41,26 +39,51 @@
   font-size: 20px;
 }
 
-.li{
+.li {
   position: relative;
-  top:-7px;
-  left:15px;
+  top: -7px;
+  left: 15px;
   font-size: 20px;
 }
-.p{
+
+.p {
   position: relative;
-  top:5px;
+  line-height: 18px;
 }
 
-.p2{
-  position: relative;
-  top:-5px;
+.code {
+  font-family: 'Cascadia Code';
+  font-weight: 600;
+  font-size: 20px;
 }
-.p3{
+
+.border {
+  border: 2px solid darkblue;
+  width: 300px;
+  height:600px;
   position: relative;
-  top:-12px;
+  left: 120px;
+  top: 50px;
+  font-family: 'Segoe UI';
+  font-size: 16px;
 }
-.p4{
+
+.border2 {
+  border: 2px solid rgb(15, 105, 3);
+  width: 260px;
+  height: 560px;
   position: relative;
-  top:-23px;
+  left: 15px;
+  top: 10px;
+  font-family: 'Segoe UI';
+  font-size: 16px;
+}
+.border3 {
+  border: 2px solid rgb(228, 106, 7);
+  width: 210px;
+  position: relative;
+  left: 20px;
+  margin-top: 15px;
+  font-family: 'Segoe UI';
+  font-size: 16px;
 }

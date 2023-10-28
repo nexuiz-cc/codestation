@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Conten32Child1 from './Conten32Child1';
 import withLog3 from '../HOC/withLog3';
 const NewChild = withLog3(Conten32Child1);
-export default class Content32 extends Component {
+export default class Content33 extends Component {
+
   constructor() {
     super();
     this.comRef = React.createRef();
@@ -12,24 +13,19 @@ export default class Content32 extends Component {
   }
 
   clickHandle = () => {
-    // 查看当前的 Ref 所关联的组件
-    console.log(this.comRef);
+    console.log('查看当前的 Ref 所关联的组件:',this.comRef);
   };
 
   render() {
     return (
       <div>
-        <button
-          onClick={() =>
-            this.setState({
-              show: !this.state.show,
-            })
-          }>
+        <button onClick={() =>this.setState({show:!this.state.show})}>
           show/hide
         </button>
         <button onClick={this.clickHandle}>触发子组件方法</button>
-        {this.state.show ? <NewChild ref={this.comRef} /> : null}
+        { this.state.show ? <NewChild ref={this.comRef} /> : null }
       </div>
     );
   }
+
 }

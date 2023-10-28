@@ -22,6 +22,7 @@ import Content1 from "../components/Content1.jsx";
 import Content2 from "../components/Content2.jsx";
 import Defalut from "../components/Defalut.jsx";
 import Content3 from "../components/Content3.jsx";
+import Content4 from "../components/Content4.jsx";
 export const RouteConfig = () => {
   return (
     <Routes>
@@ -41,9 +42,10 @@ export const RouteConfig = () => {
       <Route path="/review" element={<Review />} />
       <Route path="/learnReact" element={<LearnReact />} >
         <Route index element={<Defalut />}/>
-        <Route path="content1" element={<Content1 />}/>
-        <Route path="content2" element={<Content2 />}/>
-        <Route path="content3" element={<Content3 />}/>
+        <Route path="content1" element={<Content1/>}/>
+        <Route path="content2" element={<Content2/>}/>
+        <Route path="content3" element={<Content3/>}/>
+        <Route path="content4" element={<Content4/>}/>
       </Route>
     </Routes>
   );
