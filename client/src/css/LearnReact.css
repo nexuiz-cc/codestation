@@ -1,0 +1,57 @@
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #599fc7 !important;
+}
+
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  color: whitesmoke;
+  background: #02396d !important;
+}
+
+.js{
+  background-color: black;
+}
+.code{
+  background-color: #bcd2e7 !important;
+  color: rgb(0, 0, 0) !important;
+  font-family: 'Calling code' !important;
+  font-size: 16px !important;
+}
+.h4{
+  display: flex;
+  font-family: '冬青黑体简体中文';
+  position: relative;
+  font-size: 20px;
+  line-height: 30px;
+}
+.root{
+  position: relative;
+  left: 40px;
+}
+.modal{
+  width: 850px;
+  height: 550px;
+  border: 3px solid green;
+  position: absolute;
+  left: calc(20%);
+  top: calc(12%);
+  text-align: center;
+  line-height: 550px;
+  font-size:46px;
+  color:green;
+}
+.p {
+  position: relative;
+  font-family: '冬青黑体简体中文';
+  font-size: 20px;
+  line-height: 30px;
+}
+.btn{
+  width: 200px;
+  font-family: '冬青黑体简体中文';
+  font-size: 16px !important;
+  min-height: 40px;
+  background-color: burlywood !important;
+  border:  2px solid burlywood !important;
+}

@@ -23,6 +23,10 @@ import Content2 from "../components/Content2.jsx";
 import Defalut from "../components/Defalut.jsx";
 import Content3 from "../components/Content3.jsx";
 import Content4 from "../components/Content4.jsx";
+import Content5 from "../components/Content5.jsx";
+import Content6 from "../components/Content6.jsx";
+import Content7 from "../components/Content7.jsx";
+import Content8 from "../components/Content8.jsx";
 export const RouteConfig = () => {
   return (
     <Routes>
@@ -46,6 +50,10 @@ export const RouteConfig = () => {
         <Route path="content2" element={<Content2/>}/>
         <Route path="content3" element={<Content3/>}/>
         <Route path="content4" element={<Content4/>}/>
+        <Route path="content5" element={<Content5/>}/>
+        <Route path="content6" element={<Content6/>}/>
+        <Route path="content7" element={<Content7/>}/>
+        <Route path="content8" element={<Content8/>}/>
       </Route>
     </Routes>
   );
