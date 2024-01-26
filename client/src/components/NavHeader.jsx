@@ -68,13 +68,7 @@ function NavHeader(props) {
       {/* 搜索框 */}
       <div className='searchContainer'>
         <Input.Group compact>
-          <Select
-            defaultValue='issue'
-            size='large'
-            style={{
-              width: '20%',
-            }}
-            onChange={onChange}>
+          <Select defaultValue='issue'  size='large'  style={{ width: '20%'}} onChange={onChange}>
             <Option value='issue'>问答</Option>
             <Option value='book'>书籍</Option>
             {/* <Option value="jobs">招聘</Option> */}

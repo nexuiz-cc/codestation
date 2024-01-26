@@ -13,7 +13,7 @@
   background-color: black;
 }
 .code{
-  background-color: #bcd2e7 !important;
+  background-color: #4ee99b !important;
   color: rgb(0, 0, 0) !important;
   font-family: 'Calling code' !important;
   font-size: 16px !important;
@@ -44,14 +44,32 @@
 .p {
   position: relative;
   font-family: '冬青黑体简体中文';
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 18px;
+  line-height: 10px;
 }
 .btn{
   width: 200px;
   font-family: '冬青黑体简体中文';
   font-size: 16px !important;
   min-height: 40px;
-  background-color: burlywood !important;
-  border:  2px solid burlywood !important;
+  background-color: rgb(58, 182, 219) !important;
+  border:  2px solid rgb(58, 182, 219) !important;
+}
+.btn2{
+  width: 100px;
+  font-family: '冬青黑体简体中文';
+  font-size: 16px !important;
+  min-height: 40px;
+  color: #ffffff !important;
+  background-color: rgb(24, 167, 79) !important;
+  border:  2px solid rgb(24, 167, 79) !important;
+  position: relative;
+  margin-left: 20px;
+  right: 20px;
+  top:10px;
+}
+
+iframe
+{
+    display: none;
 }

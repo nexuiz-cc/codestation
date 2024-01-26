@@ -94,3 +94,14 @@ export function formatDate(timestamp, part) {
   }
   return optionContainer;
 }
+
+export function objectEqual(obj1, obj2){
+  for(let prop in obj1){
+    if(!Object.is(obj1[prop],obj2[prop])){
+      // 进入此 if，说明有属性值不相等
+      // 只要有一个不相等，那么就应该判断两个对象不等
+      return false;
+    }
+  }
+  return true;
+}

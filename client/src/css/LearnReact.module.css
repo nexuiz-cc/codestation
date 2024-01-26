@@ -23,8 +23,10 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 250px;
+  margin-top: 350px;
+  margin-left: 650px;
   font-size: 48px;
+  font-family: '冬青黑体简体中文';
 }
 
 .content {
