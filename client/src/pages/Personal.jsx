@@ -337,7 +337,7 @@ function Personal(props) {
                         }} />
                         <PersonalInfoItem info={{
                             itemName: "上次登录时间",
-                            itemValue: formatDate(userInfo.lastLoginDate),
+                            itemValue: userInfo.lastLoginDate,
                         }} />
                         <div style={{ fontWeight: 100, height: 50 }}>当前头像：</div>
                         <Image src={userInfo.avatar} width={100} />

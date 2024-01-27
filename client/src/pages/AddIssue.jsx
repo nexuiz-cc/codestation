@@ -1,13 +1,8 @@
 import { Form, Button, Input, message, Select } from "antd";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import "@toast-ui/editor/dist/i18n/zh-cn";
-
 import styles from "../css/AddIssue.module.css"
 import { useSelector,useDispatch } from "react-redux"
-
 import { addIssue } from "../api/issue"
 import { typeOptionCreator } from "../utils/tool"
 import { getTypeList } from "../redux/typeSlice"
@@ -15,10 +10,8 @@ import { getTypeList } from "../redux/typeSlice"
 function AddIssue() {
     const formRef = useRef();
     const editorRef = useRef();
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const [issueInfo, setIssueInfo] = useState({
         issueTitle: "", // 问题标题
         issueContent: "", // 问题描述
