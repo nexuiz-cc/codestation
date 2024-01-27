@@ -26,72 +26,86 @@
   width: 140px;
   height: 40px;
   /* outline: 1px solid red; */
-  background: url("../../public/logo1.png");
+  background: url('../../public/logo1.png');
   background-size: contain;
   background-position: center;
   transform: scale(1.3);
 }
 
 .navContainer {
-  width: 566px;
+  width: 1000px;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  /* outline: 1px solid greenyellow; */
 }
 
-
-.dropdown{
+.dropdown {
   background-color: #001529 !important;
 }
-.langbtn{
+.langbtn {
   position: relative;
   left: 610px;
   width: 120px;
   height: 40px;
-  border: 1px solid #1890FF !important;
+  border: 1px solid #1890ff !important;
   color: #fff !important;
   background-color: #001529 !important;
 }
-.langbtn:hover{
+.langbtn:hover {
   border: 1px solid #fff !important;
-  color: #1890FF !important;
+  color: #1890ff !important;
 }
 
 .navgation {
-  display: flex;
+  width: 100px;
+  color: #fff;
+  position: relative;
+  padding-left: 10px;
+  font-size: 18px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 18px;
+}
+
+.navgation_interview {
+  width: 300px;
   color: #fff;
   position: relative;
   line-height: 24px;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 16px;
+  font-size: 18px;
 }
-
-
 
 .searchContainer {
-  width: 500px;
+  width: 750px;
   height: 100%;
-  display: flex;
-  align-items: center;
+  position: relative;
+  top: 10px;
 }
 
-
+.search {
+  width: 350px;
+  position: relative;
+  top: -40px;
+  left: 78px;
+}
 .loginBtnContainer {
   width: 200px;
   height: 100%;
+  position: relative;
+  left: 90px;
+  top: -1px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* outline: 1px solid blue; */
 }
-
+.ant-layout{
+  background-color:#EEEDEB !important;
+}
 .content {
   width: 1903px;
   max-height: 2000px;
-  background-color: #fff;
   margin: 85px auto 0 auto;
 }
 
@@ -117,12 +131,11 @@
   margin-right: 10px;
 }
 
-
-.paginationContainer{
+.paginationContainer {
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   /* outline: 1px solid blue; */
 }

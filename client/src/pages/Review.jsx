@@ -68,9 +68,7 @@ function Review(props) {
       );
     }
   };
-  const pass = () => {
-    updateIssue();
-  };
+
   const columns = [
     {
       title: 'Title',
@@ -124,12 +122,19 @@ function Review(props) {
       key: 'action',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='text' id='pass'>Pass</Button>
-          <Button type='text' id='confirm'>Pass with confirm</Button>
+          <Button type='text' id='confirm' onClick={()=>{updateRecord(record)}}>Pass</Button>
         </Space>
       ),
     },
   ];
+
+  const updateRecord = (param)=>{
+    let id = param._id;
+     updateIssue(
+       id,{issueStatus:true}
+     )
+     location.reload();
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -198,6 +203,7 @@ function Review(props) {
       <h3>审核</h3>
       <Table
         className='table'
+        key={tableData.id}
         columns={columns}
         dataSource={tableData}
         pagination={tableParams.pagination}

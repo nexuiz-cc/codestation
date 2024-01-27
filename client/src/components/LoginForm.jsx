@@ -11,9 +11,31 @@ function LoginForm(props) {
   const [value, setValue] = useState(1);
   const dispatch = useDispatch();
   const momentDate = moment();
+  const year = momentDate.year().toString();
+  const momentDatetoString = (param) => {
+    if (param < 10) {
+      param = '0' + param;
+    } else {
+      param = param.toString();
+    }
+  };
+  let month = momentDate.month() + 1;
+  month = momentDatetoString(month);
+  let day = momentDate.date();
+  day = momentDatetoString(day);
+  let hh = momentDate.hour();
+  hh = momentDatetoString(hh);
+  let mm = momentDate.minute();
+  mm = momentDatetoString(mm);
   const { userInfo } = useSelector((state) => state.user);
   const [currentDate, setCurrentDate] = useState({
-    lastLoginDate:momentDate.format('lll')
+    lastLoginDate: {
+      year: year,
+      month: month,
+      day: day,
+      hh: hh,
+      mm: mm,
+    },
   });
   const [loginInfo, setLoginInfo] = useState({
     loginId: '',
@@ -356,10 +378,10 @@ function LoginForm(props) {
       captchaClickHandle();
     }
   }
-
+  const title = '注册/登录' + ' ' + momentDate.format('lll');
   return (
     <Modal
-      title='注册/登录'
+      title={title}
       open={props.isShow}
       onOk={handleOk}
       onCancel={handleCancel}

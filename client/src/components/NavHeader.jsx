@@ -91,7 +91,7 @@ function NavHeader(props) {
         <span>
           <NavLink
             to='/interviews'
-            className='navgation'>
+            className='navgation_interview'>
             {t('navHeader.interview')}
           </NavLink>
         </span>
@@ -121,11 +121,10 @@ function NavHeader(props) {
             placeholder='请输入要搜索的内容'
             allowClear
             enterButton='搜索'
+            className='search'
             size='large'
             onSearch={onSearch}
-            style={{
-              width: '80%',
-            }}
+           
           />
         </Input.Group>
       </div>

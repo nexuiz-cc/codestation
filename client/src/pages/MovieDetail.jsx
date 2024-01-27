@@ -3,11 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/movieDetail.css';
 import { Layout, Card, Tag, Button,Avatar ,Comment} from 'antd';
-import '@wangeditor/editor/dist/css/style.css';
-import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { useSelector } from "react-redux";
 import { UserOutlined } from '@ant-design/icons';
-import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 const { Footer, Content } = Layout;
 import _ from 'lodash';
 
@@ -17,15 +14,18 @@ function MovieDetail() {
   const [date, setDate] = useState('');
   const [year, setYear] = useState('');
   const [actors, setActors] = useState([]);
-  const [editor, setEditor] = useState(null);
   const [html, setHtml] = useState('<p></p>');
   const [keywords, setKeywords] = useState([]);
   const { userInfo, isLogin } = useSelector(state => state.user);
   const [commentInfo, setCommentInfo] = useState(null);
   const toolbarConfig = {};
-  const editorConfig = {
-    placeholder: '请输入内容...',
-  };
+  const [editor] = useState(() => withReact(createEditor()));
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [{ text: 'A line of text in a paragraph.' }],
+    },
+  ]
   let avatar = null;
   if (isLogin) {
     avatar = (<Avatar src={userInfo.avatar} alt="用户头像" />);
@@ -192,14 +192,7 @@ function MovieDetail() {
               mode='default'
               style={{ borderBottom: '1px solid #ccc' }}
             />
-            <Editor
-              defaultConfig={editorConfig}
-              value={html}
-              onCreated={setEditor}
-              onChange={(editor) => setHtml(editor.getHtml())}
-              mode='default'
-              style={{ height: '500px', overflowY: 'hidden' }}
-            />
+             <Slate editor={editor} value={initialValue} ><Editable /></Slate>
           </div>
           <Button className='submit'>Submit</Button>
 

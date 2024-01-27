@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { useNavigate, Outlet } from 'react-router-dom';
 import styles from '../css/LearnReact.module.css';
-import '../css/LearnReact.css';
 import { MyContext } from '../context';
 function LearnReact() {
   const { Sider, Content } = Layout;

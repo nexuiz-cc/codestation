@@ -3,3 +3,12 @@
     text-align:center;
     margin: 40px 0;
 }
+
+.w-e-text-container [data-slate-editor] pre>code {
+    background-color: #595959;
+    border-radius: 4px 4px;
+    display: block;
+    font-size: 14px;
+    padding: 10px;
+    text-indent: 0;
+  }

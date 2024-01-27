@@ -6,9 +6,10 @@ import { addComment, getIssueCommentById, getBookCommentById } from '../api/comm
 import { getUserById, editUser } from '../api/user';
 import { formatDate } from '../utils/tool';
 import { updateIssue } from '../api/issue';
-
 import styles from '../css/Discuss.module.css';
-
+import '@wangeditor/editor/dist/css/style.css';
+import { Editor, Toolbar } from '@wangeditor/editor-for-react';
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 /**
  * 评论组件
  * @param {*} props
@@ -21,7 +22,16 @@ function Discuss(props) {
   const [commentList, setCommentList] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [pageInfo, setPageInfo] = useState({});
-  const editorRef = useRef();
+  // editor 实例
+  const [editor, setEditor] = useState(null);
+  // 编辑器内容
+  const [html, setHtml] = useState('');
+  // 工具栏配置
+  const toolbarConfig = {};
+  // 编辑器配置
+  const editorConfig = {
+    placeholder: '请输入内容...',
+  };
 
   useEffect(() => {
     async function fetchCommentList() {
@@ -59,7 +69,12 @@ function Discuss(props) {
     if (props.targetId) {
       fetchCommentList();
     }
-  }, [props.targetId, refresh]);
+    return () => {
+      if (editor == null) return;
+      editor.destroy();
+      setEditor(null);
+    };
+  }, [props.targetId, refresh.editor]);
 
   // 头像
   let avatar = null;
@@ -78,7 +93,7 @@ function Discuss(props) {
     let newComment = null;
     if (props.commentType === 1) {
       // 新增问答评论
-      newComment = editorRef.current.getInstance().getHTML();
+      newComment = html;
     } else if (props.commentType === 2) {
       // 新增书籍评论
       newComment = value;
@@ -108,7 +123,8 @@ function Discuss(props) {
           points: userInfo.points + 4,
         });
         message.success('评论添加成功，积分+4');
-        editorRef.current.getInstance().setHTML('');
+        setHtml('<p></p>');
+        location.reload();
       } else if (props.commentType === 2) {
         // 书籍评论数 + 1
         updateBook(props.bookInfo._id, {
@@ -136,16 +152,24 @@ function Discuss(props) {
           <>
             <Form.Item>
               {props?.commentType === 1 ? (
-                <Editor
-                  initialValue=''
-                  previewStyle='vertical'
-                  height='270px'
-                  initialEditType='wysiwyg'
-                  useCommandShortcut={true}
-                  language='zh-CN'
-                  ref={editorRef}
-                  className='editor'
-                />
+                <>
+                  <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
+                    <Toolbar
+                      editor={editor}
+                      defaultConfig={toolbarConfig}
+                      mode='default'
+                      style={{ borderBottom: '1px solid #ccc' }}
+                    />
+                    <Editor
+                      defaultConfig={editorConfig}
+                      value={html}
+                      onCreated={setEditor}
+                      onChange={(editor) => setHtml(editor.getHtml())}
+                      mode='default'
+                      style={{ height: '200px', overflowY: 'hidden' }}
+                    />
+                  </div>
+                </>
               ) : (
                 <Input.TextArea
                   rows={4}
