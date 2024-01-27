@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import zhCN from "antd/es/locale/zh_CN";
 import { ConfigProvider } from "antd";
-
+import './i18n.config';
 import "antd/dist/antd.min.css";
 import "./index.css";
 

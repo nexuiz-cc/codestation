@@ -33,7 +33,7 @@
 }
 
 .navContainer {
-  width: 400px;
+  width: 566px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -41,8 +41,31 @@
   /* outline: 1px solid greenyellow; */
 }
 
+
+.dropdown{
+  background-color: #001529 !important;
+}
+.langbtn{
+  position: relative;
+  left: 610px;
+  width: 120px;
+  height: 40px;
+  border: 1px solid #1890FF !important;
+  color: #fff !important;
+  background-color: #001529 !important;
+}
+.langbtn:hover{
+  border: 1px solid #fff !important;
+  color: #1890FF !important;
+}
+
 .navgation {
+  display: flex;
   color: #fff;
+  position: relative;
+  line-height: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 16px;
 }
 

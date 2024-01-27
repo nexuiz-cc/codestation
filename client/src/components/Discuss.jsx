@@ -6,9 +6,6 @@ import { addComment, getIssueCommentById, getBookCommentById } from '../api/comm
 import { getUserById, editUser } from '../api/user';
 import { formatDate } from '../utils/tool';
 import { updateIssue } from '../api/issue';
-import { updateBook } from '../api/book';
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
 
 import styles from '../css/Discuss.module.css';
 

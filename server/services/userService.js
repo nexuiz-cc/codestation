@@ -106,7 +106,7 @@ module.exports.addUserService = async function (newUserInfo) {
       // 创建时间
       newUserInfo.registerDate = new Date().getTime().toString();
       // 上次登录时间
-      newUserInfo.lastLoginDate = newUserInfo.registerDate;
+      newUserInfo.lastLoginDate = new Date().now().getTime().toString();
       // 初始积分
       newUserInfo.points = 100;
 
