@@ -37,9 +37,9 @@ function AddIssue() {
 
   useEffect(() => {
     if (!typeList.length) {
-        dispatch(getTypeList());
+      dispatch(getTypeList());
     }
-}, [])
+  }, []);
 
   // 用户填写内容时更新表单控件内容
   function updateInfo(newInfo, key) {
@@ -107,10 +107,9 @@ function AddIssue() {
         {/* 问答内容 */}
         <Form.Item
           label='问题描述'
-          name='issueContent'
-         >
+          name='issueContent'>
           <div>
-            <Toolbar
+            {/* <Toolbar
               editor={addIssueEditor}
               defaultConfig={addIssueToolbarConfig}
               mode='default'
@@ -124,7 +123,7 @@ function AddIssue() {
               mode='default'
               ref={editorRef}
               style={{ height: '300px', overflowY: 'hidden' }}
-            />
+            /> */}
           </div>
         </Form.Item>
 
