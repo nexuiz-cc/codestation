@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/movieDetail.css';
-import { Layout, Card, Tag, Button,Avatar ,Comment} from 'antd';
-import { useSelector } from "react-redux";
+import { Layout, Card, Tag, Button, Avatar, Comment } from 'antd';
+import { useSelector } from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
+import '@wangeditor/editor/dist/css/style.css';
+import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 const { Footer, Content } = Layout;
 import _ from 'lodash';
 
@@ -14,24 +16,30 @@ function MovieDetail() {
   const [date, setDate] = useState('');
   const [year, setYear] = useState('');
   const [actors, setActors] = useState([]);
-  const [html, setHtml] = useState('<p></p>');
   const [keywords, setKeywords] = useState([]);
-  const { userInfo, isLogin } = useSelector(state => state.user);
+  const { userInfo, isLogin } = useSelector((state) => state.user);
   const [commentInfo, setCommentInfo] = useState(null);
-  const toolbarConfig = {};
-  const [editor] = useState(() => withReact(createEditor()));
-  const initialValue = [
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-  ]
+  // editor 实例
+  const [movieEditor, setMovieEditor] = useState(null);
+  // 编辑器内容
+  const [movieHTML, setMovieHTML] = useState('');
+  // 工具栏配置
+  const movieToolbarConfig = {};
+  // 编辑器配置
+  const movieEditorConfig = {
+    placeholder: '请输入内容...',
+  };
   let avatar = null;
   if (isLogin) {
-    avatar = (<Avatar src={userInfo.avatar} alt="用户头像" />);
-} else {
-    avatar = (<Avatar icon={<UserOutlined />} />);
-}
+    avatar = (
+      <Avatar
+        src={userInfo.avatar}
+        alt='用户头像'
+      />
+    );
+  } else {
+    avatar = <Avatar icon={<UserOutlined />} />;
+  }
   const [colors, setColors] = useState([
     'magenta',
     'red',
@@ -121,7 +129,6 @@ function MovieDetail() {
         <div className='photo'>
           <img src={data.poster_path} />
           <h4 className='h4'>
-            {' '}
             {data.title} ( {year} ){' '}
           </h4>
           <p className='text'>{date}</p>
@@ -132,18 +139,17 @@ function MovieDetail() {
           {actors.map(
             (item) =>
               item.profile_path !== null && (
-                <div className='space'>
-                  <Card
-                    className='card'
-                    size='small'>
-                    <img
-                      src={item.profile_path}
-                      width='150'
-                    />
-                    <h4 className='actorsName'>{item.name}</h4>
-                    <p className='character'>{item.character}</p>
-                  </Card>
-                </div>
+                <Card
+                  key={item.name}
+                  className='card'
+                  size='small'>
+                  <img
+                    src={item.profile_path}
+                    width='150'
+                  />
+                  <h4 className='actorsName'>{item.name}</h4>
+                  <p className='character'>{item.character}</p>
+                </Card>
               ),
           )}
         </div>
@@ -184,18 +190,29 @@ function MovieDetail() {
           </div>
         </div>
         <div className='editor'>
-          <img src={userInfo.avatar} width='50' className='avatar'/>
+          <img
+            src={userInfo.avatar}
+            width='50'
+            className='avatar'
+          />
           <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
             <Toolbar
-              editor={editor}
-              defaultConfig={toolbarConfig}
+              editor={movieEditor}
+              defaultConfig={movieToolbarConfig}
               mode='default'
               style={{ borderBottom: '1px solid #ccc' }}
             />
-             <Slate editor={editor} value={initialValue} ><Editable /></Slate>
+            <Editor
+              defaultConfig={movieEditorConfig}
+              value={movieHTML}
+              onCreated={setMovieEditor}
+              onChange={(movieEditor) => setMovieHTML(movieEditor.getHtml())}
+              mode='default'
+              style={{ height: '300px', overflowY: 'hidden' }}
+            />
           </div>
-          <Button className='submit'>Submit</Button>
 
+          <Button className='submit'>Submit</Button>
         </div>
       </Content>
       <Footer className='Footer'>Footer</Footer>

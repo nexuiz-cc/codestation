@@ -28,5 +28,9 @@ export const zh = {
       date2:'月',
       date3:'日'
     },
+    issue:{
+      placeholder:"请键入内容...",
+      issueDetail:"问题详情"
+    }
   },
 };

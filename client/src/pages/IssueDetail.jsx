@@ -9,12 +9,13 @@ import { getIssueById } from '../api/issue';
 import { getUserById } from '../api/user';
 import { formatDate } from '../utils/tool';
 import { updateIssue } from '../api/issue';
-
+import { useTranslation } from 'react-i18next';
 import styles from '../css/IssueDetail.module.css';
 
 function IssueDetail(props) {
   const { id } = useParams(); // 获取可能传递过来的 id
   const [issueInfo, setIssueInfo] = useState(null);
+  const { t } = useTranslation();
   const [issueUser, setIssueUserName] = useState(null);
 
   // 根据传递过来的 id 获取面试题详情
@@ -33,7 +34,7 @@ function IssueDetail(props) {
 
   return (
     <div className={styles.container}>
-      <PageHeader title='问题详情' />
+      <PageHeader title={t('issue.issueDetail')} />
       <div className={styles.detailContainer}>
         <div className={styles.leftSide}>
           <div className={styles.question}>

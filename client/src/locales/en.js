@@ -28,5 +28,9 @@ export const en = {
       date2:'/',
       date3:''
     },
+    issue:{
+      placeholder:"Please enter content...",
+      issueDetail:"Issue Details"
+    }
   },
 };

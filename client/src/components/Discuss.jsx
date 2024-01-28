@@ -10,6 +10,7 @@ import styles from '../css/Discuss.module.css';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
+import { useTranslation } from 'react-i18next';
 /**
  * 评论组件
  * @param {*} props
@@ -21,16 +22,26 @@ function Discuss(props) {
   const [value, setValue] = useState('');
   const [commentList, setCommentList] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const { t } = useTranslation();
   const [pageInfo, setPageInfo] = useState({});
   // editor 实例
-  const [editor, setEditor] = useState(null);
+  const [issueEditor, setIssueEditor] = useState(null);
+  const [bookEditor, setBookEditor] = useState(null);
   // 编辑器内容
-  const [html, setHtml] = useState('');
+  const [issueHTML, setIssueHTML] = useState('');
+  const [bookHTML, setBookHTML] = useState('');
   // 工具栏配置
-  const toolbarConfig = {};
+  const issueToolbarConfig = {};
   // 编辑器配置
-  const editorConfig = {
-    placeholder: '请输入内容...',
+  const issuEditorConfig = {
+    placeholder: t('issue.placeholder'),
+    scroll: true
+  };
+  const bookToolbarConfig = {};
+  // 编辑器配置
+  const bookEditorConfig = {
+    placeholder: 'bookEditorConfig...',
+    scroll: true
   };
 
   useEffect(() => {
@@ -70,11 +81,14 @@ function Discuss(props) {
       fetchCommentList();
     }
     return () => {
-      if (editor == null) return;
-      editor.destroy();
-      setEditor(null);
+      if (issueEditor == null) return;
+      issueEditor.destroy();
+      setIssueEditor(null);
+      if (bookEditor == null) return;
+      bookEditor.destroy();
+      setBookEditor(null);
     };
-  }, [props.targetId, refresh.editor]);
+  }, [props.targetId, refresh.issueEditor,refresh.bookEditor]);
 
   // 头像
   let avatar = null;
@@ -152,31 +166,39 @@ function Discuss(props) {
           <>
             <Form.Item>
               {props?.commentType === 1 ? (
-                <>
                   <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
                     <Toolbar
-                      editor={editor}
-                      defaultConfig={toolbarConfig}
+                      editor={issueEditor}
+                      defaultConfig={issueToolbarConfig}
                       mode='default'
                       style={{ borderBottom: '1px solid #ccc' }}
                     />
                     <Editor
-                      defaultConfig={editorConfig}
-                      value={html}
-                      onCreated={setEditor}
-                      onChange={(editor) => setHtml(editor.getHtml())}
+                      defaultConfig={issuEditorConfig}
+                      value={issueHTML}
+                      onCreated={setIssueEditor}
+                      onChange={(issueEditor) => setIssueHTML(issueEditor.getHtml())}
                       mode='default'
-                      style={{ height: '200px', overflowY: 'hidden' }}
+                      style={{ height: '300px', overflowY: 'hidden' }}
                     />
                   </div>
-                </>
               ) : (
-                <Input.TextArea
-                  rows={4}
-                  placeholder={isLogin ? '' : '请登录后评论...'}
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
+                <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
+                <Toolbar
+                  editor={bookEditor}
+                  defaultConfig={bookToolbarConfig}
+                  mode='default'
+                  style={{ borderBottom: '1px solid #ccc' }}
                 />
+                <Editor
+                  defaultConfig={bookEditorConfig}
+                  value={bookHTML}
+                  onCreated={setBookEditor}
+                  onChange={(bookEditor) => setBookHTML(bookEditor.getHtml())}
+                  mode='default'
+                  style={{  height:'300px',overflowY: 'hidden'}}
+                />
+              </div>
               )}
             </Form.Item>
             <Form.Item>
