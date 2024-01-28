@@ -31,6 +31,12 @@ export const en = {
     issue:{
       placeholder:"Please enter content...",
       issueDetail:"Issue Details"
+    },
+    loginFirst:{
+      warn:"Login First..."
+    },
+    addissue:{
+      msg:'Please enter your content!'
     }
   },
 };

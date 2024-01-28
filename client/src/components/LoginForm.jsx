@@ -9,32 +9,53 @@ import styles from '../css/LoginForm.module.css';
 
 function LoginForm(props) {
   const [value, setValue] = useState(1);
-  const dispatch = useDispatch();
   const momentDate = moment();
-  const year = momentDate.year().toString();
-  const momentDatetoString = (param) => {
-    if (param < 10) {
-      param = '0' + param;
+  const dispatch = useDispatch();
+  const getDate = () => {
+    const year = momentDate.year().toString();
+    let month = momentDate.month() + 1;
+    if (month < 10) {
+      month = '0' + month;
     } else {
-      param = param.toString();
+      month = month.toString();
     }
-  };
-  let month = momentDate.month() + 1;
-  month = momentDatetoString(month);
-  let day = momentDate.date();
-  day = momentDatetoString(day);
-  let hh = momentDate.hour();
-  hh = momentDatetoString(hh);
-  let mm = momentDate.minute();
-  mm = momentDatetoString(mm);
-  const { userInfo } = useSelector((state) => state.user);
-  const [currentDate, setCurrentDate] = useState({
-    lastLoginDate: {
+
+    let day = momentDate.date();
+    if (day < 10) {
+      day = '0' + day;
+    } else {
+      day = day.toString();
+    }
+
+    let hh = momentDate.hour();
+    if (hh < 10) {
+      hh = '0' + hh;
+    } else {
+      hh = hh.toString();
+    }
+    let mm = momentDate.minute();
+    if (mm < 10) {
+      mm = '0' + mm;
+    } else {
+      mm = mm.toString();
+    }
+    return {
       year: year,
       month: month,
       day: day,
       hh: hh,
       mm: mm,
+    };
+  };
+
+  const { userInfo } = useSelector((state) => state.user);
+  const [currentDate, setCurrentDate] = useState({
+    lastLoginDate: {
+      year: getDate().year,
+      month: getDate().month,
+      day: getDate().day,
+      hh: getDate().hh,
+      mm: getDate().mm,
     },
   });
   const [loginInfo, setLoginInfo] = useState({
@@ -58,6 +79,7 @@ function LoginForm(props) {
   }, [props.isShow]);
 
   useEffect(() => {
+    console.log('currentDate:', currentDate);
     if (loginFormRef.current) {
       loginFormRef.current.setFieldsValue(loginInfo);
     }

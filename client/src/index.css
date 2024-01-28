@@ -28,3 +28,11 @@
   --w-e-modal-button-bg-color: #fafafa;
   --w-e-modal-button-border-color: #d9d9d9;
 }
+
+.ant-layout {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+  background: white;
+}

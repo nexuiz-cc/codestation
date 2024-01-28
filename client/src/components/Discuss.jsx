@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Comment, Avatar, Button, Input, Form, message, List, Tooltip, Pagination } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -6,11 +6,12 @@ import { addComment, getIssueCommentById, getBookCommentById } from '../api/comm
 import { getUserById, editUser } from '../api/user';
 import { formatDate } from '../utils/tool';
 import { updateIssue } from '../api/issue';
-import styles from '../css/Discuss.module.css';
-import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
 import { useTranslation } from 'react-i18next';
+import styles from '../css/Discuss.module.css';
+import '@wangeditor/editor/dist/css/style.css';
+
 /**
  * 评论组件
  * @param {*} props

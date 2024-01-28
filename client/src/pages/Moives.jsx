@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Input, Layout, Select, Space, Avatar, Progress } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LoginFirst from '../components/LoginFirst';
 import axios from 'axios';
 import style from '../css/movies.module.css';
 import _ from 'lodash';
@@ -10,6 +12,7 @@ function Movies() {
   const [resultList, setresultList] = useState([]);
   const { Sider } = Layout;
   const navigate = useNavigate();
+  const { isLogin } = useSelector(state => state.user);
   const { Search } = Input;
   const options = [
     {
@@ -73,40 +76,45 @@ function Movies() {
     });
   }, []);
 
-  console.log(movies);
-  return (
-    <Layout style={{ minHeight: '150vh' }}>
-      <Sider className={style.sider}>
-        <Space.Compact className={style.compact}>
-          <Select defaultValue='title' options={ options } className={style.select} />
-          <Search className={style.siderIpt} placeholder='input search text' allowClear enterButton='🔍' size='large' onSearch={onSearch} />
-        </Space.Compact>
-      </Sider>
-      <div className={style.container}>
-        {resultList.length == 0 && movies.map((item) => (
-          <div className={style.space} key={item.id} >
-            <Card 
-              className={style.card}
-              onClick={()=>navigate(`/movie/${item.id}`)}>
-                <img src={item.poster_path} />
-                <h4 id={item.id} className={style.h4}>{ item.title }</h4>
-                <p className={style.releaseDate}>{ item.release_date }</p>
-            </Card>
-          </div>
-        ))}
-        {resultList.length != 0 && resultList.map((item) => (
-          <div className={style.space} key={item.id} onClick={()=>navigate(`/movie/${item.id}`)}>
-            <Card className={style.card}>
-              <img src={ item.poster_path } />
-              <h4 key={ item.id } className={style.h4}>
-                { item.title }
-              </h4>
-              <p>{ item.release_date }</p>
-            </Card>
-          </div>
-        ))}
-      </div>
-    </Layout>
-  );
+
+  if(isLogin){
+    return (
+      <Layout style={{ minHeight: '150vh' }}>
+        <Sider className={style.sider}>
+          <Space.Compact className={style.compact}>
+            <Select defaultValue='title' options={ options } className={style.select} />
+            <Search className={style.siderIpt} placeholder='input search text' allowClear enterButton='🔍' size='large' onSearch={onSearch} />
+          </Space.Compact>
+        </Sider>
+        <div className={style.container}>
+          {resultList.length == 0 && movies.map((item) => (
+            <div className={style.space} key={item.id} >
+              <Card 
+                className={style.card}
+                onClick={()=>navigate(`/movie/${item.id}`)}>
+                  <img src={item.poster_path} />
+                  <h4 id={item.id} className={style.h4}>{ item.title }</h4>
+                  <p className={style.releaseDate}>{ item.release_date }</p>
+              </Card>
+            </div>
+          ))}
+          {resultList.length != 0 && resultList.map((item) => (
+            <div className={style.space} key={item.id} onClick={()=>navigate(`/movie/${item.id}`)}>
+              <Card className={style.card}>
+                <img src={ item.poster_path } />
+                <h4 key={ item.id } className={style.h4}>
+                  { item.title }
+                </h4>
+                <p>{ item.release_date }</p>
+              </Card>
+            </div>
+          ))}
+        </div>
+      </Layout>
+    );
+  }else{
+    return (<LoginFirst />)
+  }
+
 }
 export default Movies;

@@ -22,13 +22,14 @@
    padding-top: 10px;
    padding-bottom: 10px;
    line-height: 24px;
-   
 }
 
 
 .root{
     font-family: 'Calling Code','冬青黑体简体中文', monospace;
     margin-left: -80px;
-    width: 103%;
+    width: 104.2%;
+    height: 1300px;
     background-color:#EEEDEB;
+    margin-top: -20px;
 }

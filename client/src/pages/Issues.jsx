@@ -2,25 +2,25 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { getIssueByPage } from '../api/issue';
-
+import LoginFirst from '../components/LoginFirst';
 import PageHeader from '../components/PageHeader';
 import IssueItem from '../components/IssueItem';
 import ScoreRank from '../components/ScoreRank';
 import Recommend from '../components/Recommend';
 import TypeSelect from '../components/TypeSelect';
 import AddIssue from '../components/AddIssueBtn';
-
 import styles from '../css/Issue.module.css';
 
 function Issue(props) {
   const [issueInfo, setIssueInfo] = useState([]);
+  const { isLogin } = useSelector(state => state.user);
   const [pageInfo, setPageInfo] = useState({
     current: 1,
     pageSize: 15,
     total: 0,
   });
 
-  
+
   const { issueTypeId } = useSelector((state) => state.type);
 
   useEffect(() => {
@@ -68,42 +68,48 @@ function Issue(props) {
     });
   }
 
-  return (
-    <div className='container'>
-      <PageHeader title='问答列表'>
-        <TypeSelect />
-      </PageHeader>
-      <div className={styles.issueContainer}>
-        {/* 左边部分 */}
-        <div className={styles.leftSide}>
-          {questionData}
-          {issueInfo.length > 0 ? (
-            <div className='paginationContainer'>
-              <Pagination
-                showQuickJumper
-                defaultCurrent={1}
-                {...pageInfo}
-                onChange={handlePageChange}
-              />
-            </div>
-          ) : (
-            <div className={styles.noIssue}>有问题，就来 coder station！</div>
-          )}
-        </div>
-        {/* 右边部分 */}
-        <div className={styles.rightSide}>
-          {/* 添加问答按钮 */}
-          <AddIssue />
-          <div style={{ marginBottom: 20 }}>
-            <Recommend />
+
+  if (isLogin) {
+    return (
+      <div className='container'>
+        <PageHeader title='问答列表'>
+          <TypeSelect />
+        </PageHeader>
+        <div className={styles.issueContainer}>
+          {/* 左边部分 */}
+          <div className={styles.leftSide}>
+            {questionData}
+            {issueInfo.length > 0 ? (
+              <div className='paginationContainer'>
+                <Pagination
+                  showQuickJumper
+                  defaultCurrent={1}
+                  {...pageInfo}
+                  onChange={handlePageChange}
+                />
+              </div>
+            ) : (
+              <div className={styles.noIssue}>有问题，就来 coder station！</div>
+            )}
           </div>
-          <div style={{ marginBottom: 20 }}>
-            <ScoreRank />
+          {/* 右边部分 */}
+          <div className={styles.rightSide}>
+            {/* 添加问答按钮 */}
+            <AddIssue />
+            <div style={{ marginBottom: 20 }}>
+              <Recommend />
+            </div>
+            <div style={{ marginBottom: 20 }}>
+              <ScoreRank />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (<LoginFirst />)
+  }
+
 }
 
 export default Issue;

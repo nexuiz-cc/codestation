@@ -1,0 +1,13 @@
+.text {
+  font-size: 50px;
+  background-color: white;
+  color: red;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 300px;
+}
+.icon {
+  display: flex;
+  margin-top: 3px;
+}

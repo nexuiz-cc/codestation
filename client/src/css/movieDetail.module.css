@@ -2,7 +2,7 @@
   object-fit: cover;
   object-position: 0 0;
   position: relative;
-  top: -22px;
+  top:-22px;
   width: 1920px;
   height: 500px;
   opacity: 0.8;
@@ -18,8 +18,8 @@
 .box2 {
   display: flex;
   position: relative;
-  left: 5px;
-  top: -530px;
+  left: 25px;
+  top: -590px;
   max-width: 1500px;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -61,7 +61,7 @@
 }
 .title {
   position: relative;
-  top: -530px;
+  top: -580px;
   left: 15px;
   font-family: 'AR One Sans', serif;
   font-size: 22px;
@@ -80,17 +80,17 @@
   font-family: 'AR One Sans', serif;
   font-weight: 600;
   font-size: 44px;
-  width: 800px;
+  min-width: 400px;
 }
 
 .text {
   color: white;
   position: relative;
-  left: 250px;
-  top: -300px;
+  left: 25px;
+  top: -85px;
   font-family: 'AR One Sans', serif;
   font-size: 25px;
-  width: 800px;
+  width: 400px;
 }
 .overview {
   color: white;

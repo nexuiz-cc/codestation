@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../css/movieDetail.css';
+import  styles  from '../css/movieDetail.module.css';
 import { Layout, Card, Tag, Button, Avatar, Comment } from 'antd';
 import { useSelector } from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
@@ -121,79 +121,80 @@ function MovieDetail() {
 
   return (
     <Layout>
-      <Content className='box'>
+      <Content className={styles.box}>  
         <img
-          src={'https://image.tmdb.org/t/p/original/' + data.backdrop_path}
-          className='backdrop'
+          className={styles.backdrop} src={'https://image.tmdb.org/t/p/original/' + data.backdrop_path}
         />
-        <div className='photo'>
+       
+     
+        <div className={styles.photo}>
           <img src={data.poster_path} />
-          <h4 className='h4'>
+          <h4 className={styles.h4}>
             {data.title} ( {year} ){' '}
           </h4>
-          <p className='text'>{date}</p>
-          <p className='overview'>{data.overview}</p>
+          <p className={styles.text}>{date}</p>
+          <p className={styles.overview}>{data.overview}</p>
         </div>
-        <p className='title'>Top Billed Cast :</p>
-        <div className='box2'>
+        <p className={styles.title}>Top Billed Cast :</p>
+        <div className={styles.box2}>
           {actors.map(
             (item) =>
               item.profile_path !== null && (
                 <Card
                   key={item.name}
-                  className='card'
+                  className={styles.card}
                   size='small'>
                   <img
                     src={item.profile_path}
                     width='150'
                   />
-                  <h4 className='actorsName'>{item.name}</h4>
-                  <p className='character'>{item.character}</p>
+                  <h4 className={styles.actorsName}>{item.name}</h4>
+                  <p className={styles.character}>{item.character}</p>
                 </Card>
               ),
           )}
         </div>
-        <div className='rSider'>
+        <div className={styles.rSider}>
           {data.title !== null && (
-            <div className='tcbox'>
-              <p className='title2'>Original Title</p>
-              <p className='content2'>{data.title}</p>
+            <div className={styles.tcbox}>
+              <p className={styles.title2}>Original Title</p>
+              <p className={styles.content2}>{data.title}</p>
             </div>
           )}
           {data.status !== null && (
-            <div className='tcbox'>
-              <p className='title2'>Status</p>
-              <p className='content2'>{data.status}</p>
+            <div className={styles.tcbox}>
+              <p className={styles.title2}>Status</p>
+              <p className={styles.content2}>{data.status}</p>
             </div>
           )}
           {data.budget != 0 && (
-            <div className='tcbox'>
-              <p className='title2'>Budget</p>
-              <p className='content2'>{'$' + data.budget * 2}</p>
+            <div className={styles.tcbox}>
+              <p className={styles.title2}>Budget</p>
+              <p className={styles.content2}>{'$' + data.budget * 2}</p>
             </div>
           )}
           {data.budget != 0 && (
-            <div className='tcbox'>
-              <p className='title2'>Revenue</p>
-              <p className='content2'>{'$' + data.revenue}</p>
+            <div className={styles.tcbox}>
+              <p className={styles.title2}>Revenue</p>
+              <p className={styles.content2}>{'$' + data.revenue}</p>
             </div>
           )}
-          <div className='tcbox'>
-            <p className='title2'>Keywords</p>
+          <div className={styles.tcbox}>
+            <p className={styles.title2}>Keywords</p>
             {keywords.map((item) => (
               <Tag
                 color={item.color}
-                className='tag'>
+                className={styles.tag}>
                 {item.name}
               </Tag>
             ))}
           </div>
         </div>
-        <div className='editor'>
+        <div className={styles.editor}>
           <img
             src={userInfo.avatar}
             width='50'
-            className='avatar'
+            className={styles.avatar}
           />
           <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
             <Toolbar
@@ -212,10 +213,10 @@ function MovieDetail() {
             />
           </div>
 
-          <Button className='submit'>Submit</Button>
+          <Button className={styles.submit}>Submit</Button>
         </div>
       </Content>
-      <Footer className='Footer'>Footer</Footer>
+      <Footer className={styles.Footer}>Footer</Footer>
     </Layout>
   );
 }

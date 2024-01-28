@@ -15,22 +15,29 @@ export const zh = {
     },
     personal: {
       title: '个人中心',
-      basicInfo:"基本信息",
-      account:"登录账号",
-      password:"账号密码",
-      nickname:"用户昵称",
-      point:"用户积分",
-      regtime:"注册时间",
-      lastlgtime:"上次登录时间",
-      avatar:"当前头像",
-      upavatar:"上传新头像",
-      date1:'年',
-      date2:'月',
-      date3:'日'
+      basicInfo: '基本信息',
+      account: '登录账号',
+      password: '账号密码',
+      nickname: '用户昵称',
+      point: '用户积分',
+      regtime: '注册时间',
+      lastlgtime: '上次登录时间',
+      avatar: '当前头像',
+      upavatar: '上传新头像',
+      date1: '年',
+      date2: '月',
+      date3: '日',
     },
-    issue:{
-      placeholder:"请键入内容...",
-      issueDetail:"问题详情"
+    issue: {
+      placeholder: '请键入内容...',
+      issueDetail: '问题详情',
+    },
+    loginFirst: {
+      warn: '请先登录...'
+    },
+    addissue:{
+      msg:'请键入问题内容！'
     }
   },
+  
 };
