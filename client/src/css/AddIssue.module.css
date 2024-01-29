@@ -1,3 +1,38 @@
-.container{
-    padding: 50px;
+.container {
+  padding: 50px;
+}
+.formItem1 {
+  margin-top: -10px;
+}
+.formItem2 {
+  margin-top: -25px;
+}
+
+.formItem3 {
+  margin-top: 30px;
+}
+
+.errMsg1 {
+  position: relative;
+  left: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: red;
+  visibility: hidden;
+}
+.errMsg2 {
+  position: relative;
+  left: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: red;
+  visibility: hidden;
+}
+.errMsg3 {
+  position: relative;
+  left: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: red;
+  visibility: hidden;
 }

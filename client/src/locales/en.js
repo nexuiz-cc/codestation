@@ -36,7 +36,9 @@ export const en = {
       warn:"Login First..."
     },
     addissue:{
-      msg:'Please enter your content!'
+      msg1:'Please enter your title!',
+      msg2:'Please choise your belong!',
+      msg3:'Please enter your content!'
     }
   },
 };

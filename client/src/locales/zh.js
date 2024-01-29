@@ -36,7 +36,9 @@ export const zh = {
       warn: '请先登录...'
     },
     addissue:{
-      msg:'请键入问题内容！'
+      msg1:'请输入标题！',
+      msg2:'请选择问题分类！',
+      msg3:'请键入问题内容！'
     }
   },
   

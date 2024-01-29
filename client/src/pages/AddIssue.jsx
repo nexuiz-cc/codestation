@@ -2,6 +2,7 @@ import { Form, Button, Input, message, Select } from 'antd';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/AddIssue.module.css';
+import '../css/AddIssue.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { addIssue } from '../api/issue';
 import { typeOptionCreator } from '../utils/tool';
@@ -12,24 +13,33 @@ import { useTranslation } from 'react-i18next';
 
 function AddIssue() {
   const formRef = useRef();
+  const msg1Ref = useRef();
+  const msg2Ref = useRef();
+  const msg3Ref = useRef();
   const editorRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [messageApi, contextHolder] = message.useMessage();
   const { t } = useTranslation();
   // editor 实例
   const [addIssueEditor, setAddIssueEditor] = useState(null);
-  const [addIssueHTML, setAddIssueHTML] = useState('');
-  const addIssueToolbarConfig = {};
+  const toolbarConfig = {};
   const addIssueEditorConfig = {
     placeholder: '请输入内容...',
   };
-
+  const [HTML, setHTML] = useState('');
   const [issueInfo, setIssueInfo] = useState({
     issueTitle: '', // 问题标题
-    issueContent: addIssueHTML, // 问题描述
-    typeId: '', // 问题分类
+    issueContent: '', // 问题描述
+    typeId: '未选择', // 问题分类
   });
-
+  const warn1 = (value) => {
+    messageApi.open({
+      type: 'error',
+      content: value,
+      className: 'errMsg1',
+    });
+  };
   // 从仓库获取类型列表
   const { typeList } = useSelector((state) => state.type);
   // 从仓库获取用户信息
@@ -52,27 +62,68 @@ function AddIssue() {
     setIssueInfo(newIssueInfo);
   }
 
+
+  const onChangeIssue1 = (v) => {
+    updateInfo(v.target.value, 'issueTitle');
+    if (issueInfo.issueTitle != '') {
+      msg1Ref.current.style.visibility = 'hidden';
+    }
+    
+  };
+
+  const onChangeIssue2 = (v) => {
+    if (v != '未选择') {
+      msg2Ref.current.style.visibility = 'hidden';
+    }
+    updateInfo(v, 'typeId');
+  };
+
+  const onChangeIssue3 = (v) => {
+    if (HTML != '<p><br></p>') {
+      msg3Ref.current.style.visibility = 'hidden';
+    }
+    setHTML(v.getHtml());
+    updateInfo(HTML, 'issueContent');
+  };
+
+ 
   /**
    * 首先获取 md 编辑器中的内容，然后再手动触发 submitHandle
    */
   function addHandle() {
-    addIssue({
-      issueTitle: issueInfo.issueTitle, // 问题标题
-      issueContent: addIssueHTML, // 问题描述
-      userId: userInfo._id, // 用户 id
-      typeId: issueInfo.typeId,
-    });
-    // 跳转回首页
-    navigate('/issues');
-    message.success('你的问题已提交，审核通过后将会进行展示');
+    if(issueInfo.issueTitle == ''){
+      msg1Ref.current.style.visibility = 'visible';
+    }else {
+      msg1Ref.current.style.visibility = 'hidden';
+    };
+    
+    if(issueInfo.typeId == '未选择'){
+      msg2Ref.current.style.visibility = 'visible';
+    }else{
+      msg2Ref.current.style.visibility = 'hidden';
+    };
+    
+    if(HTML == '<p><br></p>'){
+      msg3Ref.current.style.visibility = 'visible';
+    }else{
+      msg3Ref.current.style.visibility = 'hidden';
+      addIssue({
+        issueTitle: issueInfo.issueTitle, // 问题标题
+        issueContent: HTML, // 问题描述
+        userId: userInfo._id, // 用户 id
+        typeId: issueInfo.typeId,
+      });
+      // 跳转回首页
+      navigate('/issues');
+      message.success('你的问题已提交，审核通过后将会进行展示');
+    }
+    
   }
 
-  const handleChange = (value) => {
-    updateInfo(value, 'typeId');
-  };
 
   return (
     <div className={styles.container}>
+      {contextHolder}
       <Form
         name='basic'
         initialValues={issueInfo}
@@ -82,48 +133,64 @@ function AddIssue() {
         {/* 问答标题 */}
         <Form.Item
           label='标题'
-          name='issueTitle'
-          rules={[{ required: true, message: '请输入标题' }]}>
+          className={styles.formItem1}
+          name='issueTitle'>
           <Input
             placeholder='请输入标题'
             size='large'
             value={issueInfo.issueTitle}
-            onChange={(e) => updateInfo(e.target.value, 'issueTitle')}
+            onChange={(e) => onChangeIssue1(e)}
           />
+          <p
+            className={styles.errMsg1}
+            ref={msg1Ref}>
+            {t('addissue.msg1')}
+          </p>
         </Form.Item>
 
         {/* 问题类型 */}
         <Form.Item
           label='问题分类'
-          name='typeId'
-          rules={[{ required: true, message: '请选择问题所属分类' }]}>
+          className={styles.formItem2}
+          name='typeId'>
           <Select
             style={{ width: 200 }}
-            onChange={handleChange}>
+            defaultValue = "未选择"
+            onChange={(e)=>onChangeIssue2(e)}>
             {typeOptionCreator(Select, typeList)}
           </Select>
+          <p
+            className={styles.errMsg2}
+            ref={msg2Ref}>
+            {t('addissue.msg2')}
+          </p>
         </Form.Item>
 
         {/* 问答内容 */}
         <Form.Item
           label='问题描述'
+          className={styles.formItem3}
           name='issueContent'>
-          <div>
-            {/* <Toolbar
+          <div style={{ border: '1px solid #ccc', zIndex: 100 }}>
+            <Toolbar
               editor={addIssueEditor}
-              defaultConfig={addIssueToolbarConfig}
+              defaultConfig={toolbarConfig}
               mode='default'
               style={{ borderBottom: '1px solid #ccc' }}
             />
             <Editor
               defaultConfig={addIssueEditorConfig}
-              value={addIssueHTML}
+              value={HTML}
               onCreated={setAddIssueEditor}
-              onChange={(addIssueEditor) => setAddIssueEditor(addIssueEditor.getHtml())}
+              onChange={(addIssueEditor) => onChangeIssue3(addIssueEditor)}
               mode='default'
-              ref={editorRef}
               style={{ height: '300px', overflowY: 'hidden' }}
-            /> */}
+            />
+            <p
+              className={styles.errMsg3}
+              ref={msg3Ref}>
+              {t('addissue.msg3')}
+            </p>
           </div>
         </Form.Item>
 
