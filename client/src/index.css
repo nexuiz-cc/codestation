@@ -49,3 +49,18 @@
   font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕',
     'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif;
 }
+.ciCircleCheck{
+  transform: scale(3);
+  position: relative;
+  top: 5px;
+  background-color: green;
+  border-radius: 10px;
+
+}
+.ciCircleQuestion{
+  background-color: #FFD93D;
+  transform: scale(3);
+  position: relative;
+  top: 5px;
+  border-radius: 10px;
+}

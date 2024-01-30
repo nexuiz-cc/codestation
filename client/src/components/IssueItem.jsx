@@ -6,6 +6,8 @@ import { Tag } from 'antd';
 import styles from '../css/IssueItem.module.css';
 import { getUserById } from '../api/user';
 import { formatDate } from '../utils/tool';
+import { CiCircleCheck, CiCircleQuestion } from 'react-icons/ci';
+import { IconContext } from 'react-icons';
 
 function IssueItem(props) {
   const navigate = useNavigate();
@@ -34,13 +36,21 @@ function IssueItem(props) {
         <div>回答</div>
       </div>
       {/* 已未解决 */}
-   
-  <div className={styles.issueNum}>
-       <div>{props.issueInfo.isOpen?'未解决':'已解决'}</div>  
-  </div>
-        
-      
-    
+
+      <div className={styles.issueNum}>
+        <div>
+          {props.issueInfo.isOpen ? (
+             <IconContext.Provider value={{ color: 'white', className: 'ciCircleQuestion' }}>
+             <CiCircleQuestion />
+           </IconContext.Provider>
+          ) : (
+            <IconContext.Provider value={{ color: 'white', className: 'ciCircleCheck' }}>
+              <CiCircleCheck />
+            </IconContext.Provider>
+          )}
+        </div>
+      </div>
+
       {/* 问题内容 */}
       <div className={styles.issueContainer}>
         <div
