@@ -36,3 +36,16 @@
   min-height: 0;
   background: white;
 }
+
+.toastui-editor-tooltip {
+  position: absolute;
+  background-color: #444;
+  z-index: 40;
+  padding: 4px 7px;
+  font-size: 12px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕',
+    'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif;
+}

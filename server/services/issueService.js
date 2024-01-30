@@ -36,16 +36,14 @@ module.exports.addIssueService = async function (newIssueInfo) {
   const validateResult = validate.validate(newIssueInfo, issueRule);
   if (!validateResult) {
     // 验证通过
-
     // 添加其他信息
     newIssueInfo.scanNumber = 0; // 浏览数，默认为 0
     newIssueInfo.commentNumber = 0; // 评论数，默认为 0
+    newIssueInfo.isOpen = true;
     // 上架日期
     newIssueInfo.issueDate = new Date().getTime().toString();
-
     // 添加状态，默认是未过审状态
     newIssueInfo.issueStatus = false;
-
     return await addIssueDao(newIssueInfo);
   } else {
     // 数据验证失败

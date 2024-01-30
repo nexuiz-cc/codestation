@@ -203,6 +203,12 @@ exports.issueRule = {
     },
     type: "string",
   },
+  isOpen: {
+    presence: {
+      allowEmpty: false,
+    },
+    type: "boolean",
+  },
 };
 
 /**

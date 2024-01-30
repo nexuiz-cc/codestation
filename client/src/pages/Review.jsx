@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Table, Space, Button } from 'antd';
 import { getIssueByPage, updateIssue } from '../api/issue';
-import '../css/Review.css';
+import  styles from '../css/Review.module.css';
 
 function Review(props) {
   const [issues, setIssues] = useState([]);
@@ -20,9 +20,9 @@ function Review(props) {
   const { issueTypeId } = useSelector((state) => state.type);
   const setStatus = (param) => {
     if (param) {
-      return <Button type='text'>已审核</Button>;
+      return <Button type={styles.text}>已审核</Button>;
     } else {
-      return <Button type='text'>未审核</Button>;
+      return <Button type={styles.text}>未审核</Button>;
     }
   };
 
@@ -32,16 +32,16 @@ function Review(props) {
       param = param + '...';
       return (
         <h4
-          type='text'
-          className='title'>
+          type={styles.text}
+          className={styles.title}>
           {param}
         </h4>
       );
     } else {
       return (
         <h4
-          type='text'
-          className='title'>
+          type={styles.text}
+          className={styles.title}>
           {param}
         </h4>
       );
@@ -54,7 +54,7 @@ function Review(props) {
       return (
         <p
           type='text'
-          className='text'>
+          className={styles.text}>
           {param}
         </p>
       );
@@ -62,7 +62,7 @@ function Review(props) {
       return (
         <p
           type='text'
-          className='text'>
+          className={styles.text}>
           {param}
         </p>
       );
@@ -166,9 +166,6 @@ function Review(props) {
 
   const handleTableChange = (pagination, filters, sorter) => {
     let arr = [];
-    console.log('filters:', filters);
-
-
     if (filters.type == null || filters.issueStatus == null) {
       setTableData(resData);
     }
@@ -202,7 +199,7 @@ function Review(props) {
     <div>
       <h3>审核</h3>
       <Table
-        className='table'
+        className={styles.table}
         key={tableData.id}
         columns={columns}
         dataSource={tableData}

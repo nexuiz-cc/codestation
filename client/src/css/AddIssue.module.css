@@ -1,15 +1,10 @@
 .container {
   padding: 50px;
 }
-.formItem1 {
-  margin-top: -10px;
-}
-.formItem2 {
-  margin-top: -25px;
-}
-
-.formItem3 {
-  margin-top: 30px;
+.formItem4 {
+  position: relative;
+  top:5px;
+  left: -122px;
 }
 
 .errMsg1 {
@@ -30,8 +25,8 @@
 }
 .errMsg3 {
   position: relative;
-  left: 10px;
-  top: 5px;
+  left: 2px;
+  top: 42px;
   font-size: 16px;
   color: red;
   visibility: hidden;

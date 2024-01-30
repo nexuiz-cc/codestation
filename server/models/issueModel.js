@@ -10,6 +10,7 @@ const issueSchema = new mongoose.Schema(
     scanNumber: Number, //	问题浏览量
     commentNumber: Number, //	评论数
     issueStatus: Boolean, //	问题状态
+    isOpen:Boolean,//	已解决、未解决
     issueDate: String, //	问题时间
     userId: {
       type: mongoose.Schema.Types.ObjectId,
