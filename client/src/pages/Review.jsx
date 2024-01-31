@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Table, Space, Button } from 'antd';
+import { Table, Space, Button, Modal  } from 'antd';
 import { getIssueByPage, updateIssue } from '../api/issue';
-import  styles from '../css/Review.module.css';
+import styles from '../css/Review.module.css';
 
 function Review(props) {
   const [issues, setIssues] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [resData, setResData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
@@ -23,6 +33,13 @@ function Review(props) {
       return <Button type={styles.text}>已审核</Button>;
     } else {
       return <Button type={styles.text}>未审核</Button>;
+    }
+  };
+  const setIsopen = (param) => {
+    if (param) {
+      return <Button type={styles.text}>未解决</Button>;
+    } else {
+      return <Button type={styles.text}>已解决</Button>;
     }
   };
 
@@ -69,6 +86,8 @@ function Review(props) {
     }
   };
 
+
+
   const columns = [
     {
       title: 'Title',
@@ -104,6 +123,7 @@ function Review(props) {
     {
       title: 'Status',
       dataIndex: 'issueStatus',
+      width:'120px',
       key: 'issueStatus',
       filters: [
         {
@@ -118,23 +138,51 @@ function Review(props) {
       render: (text) => setStatus(text),
     },
     {
+      title: 'isOpen',
+      dataIndex: 'isOpen',
+      width:'170px',
+      key: 'isOpen',
+      filters: [
+        {
+          text: '已解决',
+          value: false,
+        },
+        {
+          text: '未解决',
+          value: true,
+        },
+      ],
+      render: (text) => setIsopen(text),
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='text' id='confirm' onClick={()=>{updateRecord(record)}}>Pass</Button>
+          <Button type='text' id='confirm' onClick={() => {updateRecord(record, 'issueStatus')}}>
+            PASS
+          </Button>
+          <Button type='text'  id='confirm'onClick={() => { openModal()}}>
+            PASS WITH CONFIRM
+          </Button>
+          <Button type='text' id='confirm' onClick={() => { updateRecord(record, 'isOpen')}}>
+            已解决
+          </Button>
         </Space>
       ),
     },
   ];
 
-  const updateRecord = (param)=>{
+  const updateRecord = (param, type) => {
     let id = param._id;
-     updateIssue(
-       id,{issueStatus:true}
-     )
-     location.reload();
-  }
+    switch (type) {
+      case 'issueStatus':
+        updateIssue(id, { issueStatus: true });
+      case 'isOpen':
+        updateIssue(id, { isOpen: false });
+    }
+    location.reload();
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -188,10 +236,9 @@ function Review(props) {
         arr = arr.concat(temp);
       }
       setTableData(arr);
-    };
-    
-    if(filters.issueStatus != null && filters.type != null){
+    }
 
+    if (filters.issueStatus != null && filters.type != null) {
     }
   };
 
@@ -207,6 +254,12 @@ function Review(props) {
         loading={loading}
         onChange={handleTableChange}
       />
+
+<Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   );
 }

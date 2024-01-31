@@ -1,3 +1,4 @@
+import LoginFirst from "../components/LoginFirst.jsx";
 import { RouteConfig } from "./index.jsx";
 import RouteBeforeConfig from "./RouteBeforeConfig";
 import { Alert } from "antd";
@@ -15,12 +16,7 @@ function RouteBefore() {
   if (currentPath) {
     if (currentPath.needLogin && !localStorage.getItem("userToken")) {
       return (
-        <Alert
-          message="请先登录"
-          type="warning"
-          closable
-          onClose={closeHandle}
-        />
+       <LoginFirst></LoginFirst>
       );
     }
   }

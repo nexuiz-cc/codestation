@@ -1,11 +1,11 @@
 export default [
-  { path: "/issues", needLogin: false },
-  { path: "/issues/:id", needLogin: false },
-  { path: "/books", needLogin: false },
-  { path: "/books/:id", needLogin: false },
-  { path: "/interviews", needLogin: false },
+  { path: "/issues", needLogin: true },
+  { path: "/issues/:id", needLogin: true },
+  { path: "/books", needLogin: true },
+  { path: "/books/:id", needLogin: true },
+  { path: "/interviews", needLogin: true },
   { path: "/personal", needLogin: true },
   { path: "/addIssue", needLogin: true },
-  { path: "/searchPage", needLogin: false },
-  { path: "/", needLogin: false },
+  { path: "/searchPage", needLogin: true },
+  { path: "/", needLogin: true },
 ];
