@@ -79,7 +79,6 @@ function LoginForm(props) {
   }, [props.isShow]);
 
   useEffect(() => {
-    console.log('currentDate:', currentDate);
     if (loginFormRef.current) {
       loginFormRef.current.setFieldsValue(loginInfo);
     }

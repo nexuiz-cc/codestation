@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Table, Space, Button, Modal  } from 'antd';
+import { Table, Space, Button, Modal, Divider, Typography } from 'antd';
+const { Title, Paragraph, Text, Link } = Typography;
 import { getIssueByPage, updateIssue } from '../api/issue';
 import styles from '../css/Review.module.css';
 
@@ -9,9 +10,11 @@ function Review(props) {
   const [tableData, setTableData] = useState([]);
   const [resData, setResData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [modalData, setModalData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => {
+  const openModal = (v) => {
     setIsModalOpen(true);
+    setModalData(v);
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -19,6 +22,7 @@ function Review(props) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
@@ -86,8 +90,6 @@ function Review(props) {
     }
   };
 
-
-
   const columns = [
     {
       title: 'Title',
@@ -123,7 +125,7 @@ function Review(props) {
     {
       title: 'Status',
       dataIndex: 'issueStatus',
-      width:'120px',
+      width: '120px',
       key: 'issueStatus',
       filters: [
         {
@@ -140,7 +142,7 @@ function Review(props) {
     {
       title: 'isOpen',
       dataIndex: 'isOpen',
-      width:'170px',
+      width: '170px',
       key: 'isOpen',
       filters: [
         {
@@ -159,13 +161,28 @@ function Review(props) {
       key: 'action',
       render: (_, record) => (
         <Space size='middle'>
-          <Button type='text' id='confirm' onClick={() => {updateRecord(record, 'issueStatus')}}>
+          <Button
+            type='text'
+            id='confirm'
+            onClick={() => {
+              updateRecord(record, 'issueStatus');
+            }}>
             PASS
           </Button>
-          <Button type='text'  id='confirm'onClick={() => { openModal()}}>
+          <Button
+            type='text'
+            id='confirm'
+            onClick={() => {
+              openModal(record);
+            }}>
             PASS WITH CONFIRM
           </Button>
-          <Button type='text' id='confirm' onClick={() => { updateRecord(record, 'isOpen')}}>
+          <Button
+            type='text'
+            id='confirm'
+            onClick={() => {
+              updateRecord(record, 'isOpen');
+            }}>
             已解决
           </Button>
         </Space>
@@ -237,9 +254,6 @@ function Review(props) {
       }
       setTableData(arr);
     }
-
-    if (filters.issueStatus != null && filters.type != null) {
-    }
   };
 
   return (
@@ -255,10 +269,12 @@ function Review(props) {
         onChange={handleTableChange}
       />
 
-<Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Modal
+        title={modalData.issueTitle}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}>
+        <Paragraph>{modalData.issueContent}</Paragraph>
       </Modal>
     </div>
   );

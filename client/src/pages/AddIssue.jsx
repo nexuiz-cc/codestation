@@ -44,12 +44,13 @@ function AddIssue(props) {
    */
   function addHandle() {
     console.log(addIssueHTML);
+    let content = addIssueHTML.replace('<p>','').replace('</p>','');
     if(addIssueHTML=='<p><br></p>'){
        alert('请输入内容！')
     }else{
       addIssue({
         issueTitle: issueInfo.issueTitle,
-        issueContent: addIssueHTML,
+        issueContent: content,
         userId: userInfo._id,
         typeId: issueInfo.typeId,
         isOpen:true
